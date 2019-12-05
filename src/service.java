@@ -3,6 +3,7 @@ public class service {
     private double price;
     private String description;
     private int usage_per_day;
+    private Data service_Data;
     
     public void add_service()
     {

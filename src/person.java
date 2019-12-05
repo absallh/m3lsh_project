@@ -4,6 +4,28 @@ public abstract class person {
     protected String phone;
     protected String nationality;
     protected int age;
+    protected Data person_Data;
+    protected int id;
+    
+    public person (){
+        person_Data = new Data();
+    }
+
+    public Data getPerson_Data() {
+        return person_Data;
+    }
+
+    public void setPerson_Data(Data person_Data) {
+        this.person_Data = person_Data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

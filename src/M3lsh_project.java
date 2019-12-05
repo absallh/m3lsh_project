@@ -1,15 +1,7 @@
-
-import Gui.Login;
-
-
-public class M3lsh_project {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Login l = new Login();
-        l.setVisible(true);
+public class m3lsh_project {
+    public static void main(String []args){
+        login start = new login();
+        start.run();
+       
     }
-    
 }
