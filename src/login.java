@@ -37,7 +37,7 @@ public class login {
         } //end while
         
         if (athuntcated){
-            employee user;
+            employee user = null;
             switch (premssion){
                 case "user_model":
                     System.out.println("welcome to user model");
@@ -51,7 +51,11 @@ public class login {
                     System.out.println("welcome to other_services model");
                     user = new other_services();
                     break;
-            }//end switch            
+                default :
+                    user = new employee();
+                    break;
+            }//end switch
+            user.work(); //the user will enter to his options
         }//end if (athuntcated)
     }
     

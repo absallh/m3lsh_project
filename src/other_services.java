@@ -15,5 +15,10 @@ public class other_services extends employee {
     void delete(int id) {
         
     }
+
+    @Override
+    public void work() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
