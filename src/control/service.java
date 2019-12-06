@@ -1,3 +1,5 @@
+package control;
+
 public class service {
     private String service_name;
     private double price;

@@ -1,3 +1,5 @@
+package control;
+
 public class user_model extends employee {
     private customer custo;
     

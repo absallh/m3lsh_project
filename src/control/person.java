@@ -1,3 +1,5 @@
+package control;
+
 public abstract class person {
     protected String name;
     protected String email;

@@ -1,3 +1,5 @@
+package control;
+
 public class bill {
     private String service_name;
     private double price;

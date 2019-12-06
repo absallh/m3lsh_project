@@ -1,3 +1,5 @@
+package control;
+
 public class room {
     private int room_number;
     private String room_type;

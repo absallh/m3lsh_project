@@ -1,3 +1,5 @@
+package control;
+
 public class customer extends person {
     private String comming_date;
     private String checkout;
