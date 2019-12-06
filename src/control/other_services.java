@@ -1,5 +1,7 @@
 package control;
 
+import javax.swing.JOptionPane;
+
 public class other_services extends employee {
     private service serv;
     
@@ -20,7 +22,7 @@ public class other_services extends employee {
 
     @Override
     public void work() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(null, "Welcom to other_services", "Other_services", JOptionPane.PLAIN_MESSAGE);
     }
     
 }

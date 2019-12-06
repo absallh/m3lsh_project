@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import control.login;
 /**
  *
  * @author HERO
@@ -22,9 +23,20 @@ public class Login extends JFrame{
     JLabel pass ;
     JButton login ;
     
+    private login loginControl;
+    private int times_of_login;
+    
     private String userName_txt;
     private String password_txt;
     public Login() {
+        loginControl = new login();
+        times_of_login = 1;
+    }
+    
+        /**
+     run method to run the whole program and login
+     */
+    public void run(){
         frame = new JFrame();
 //this is the charactaristics  of frame  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,27 +80,31 @@ public class Login extends JFrame{
       
     }
     
-    //private class to add event handling to the button
+    //private inner class to add event handling to the button
     private class JButtonHandler implements ActionListener{
 
         @Override
         @SuppressWarnings("the password can't be displayed")
         public void actionPerformed(ActionEvent ae) {
-            userName_txt = String.format(username.getText());//to get user name from the text box
-            password_txt = String.format(password.getText());//to get password
-            frame.dispose();//to close the whole frame
+            
+            //get the username and the password that the user entred and check it
+            if (loginControl.athuntcated(username.getText(), password.getText())){
+                frame.dispose();//to close the whole frame
+                loginControl.enterTheProgram();//let the user enter the program
+            }
+            //check if the user try to login more than 5 times
+            else if (times_of_login == 5){
+                username.setEditable(false);
+                password.setEditable(false);
+                JOptionPane.showMessageDialog(null, "you can't login again", "Error in login", JOptionPane.ERROR_MESSAGE);
+            }
+            //out put error in login
+            else{
+                times_of_login++;
+                JOptionPane.showMessageDialog(null, "Can't enter", "error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     
-    }
-    
-    
-
-    public String getUserName_txt() {
-        return userName_txt;
-    }
-
-    public String getPassword_txt() {
-        return password_txt;
     }
         
 }

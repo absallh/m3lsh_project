@@ -1,9 +1,8 @@
-import control.login;
+import Gui.Login;
 
 public class m3lsh_project {
     public static void main(String []args){
-        login start = new login();
-        start.run();
-       
+       Login start = new Login();
+       start.run();
     }
 }

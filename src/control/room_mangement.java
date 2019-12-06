@@ -1,7 +1,14 @@
 package control;
 
+import javax.swing.JOptionPane;
+
 public class room_mangement extends employee {
     private other_services otherService;
+    
+    @Override
+    public void work() {
+        JOptionPane.showMessageDialog(null, "Welcom to room_mangement", "Room_Mangmenet", JOptionPane.PLAIN_MESSAGE);
+    }
     
     public void enter_user_date (){}
     
@@ -24,11 +31,6 @@ public class room_mangement extends employee {
     @Override
     void delete(int id) {
         
-    }
-
-    @Override
-    public void work() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
