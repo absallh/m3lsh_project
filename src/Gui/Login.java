@@ -76,7 +76,7 @@ public class Login extends JFrame{
        JButtonHandler handler = new JButtonHandler();
        login.addActionListener( handler );//add event handling to the button
        
-       frame.setVisible(true);//make the frame visable
+//       frame.setVisible(true);//make the frame visable
       
     }
     
