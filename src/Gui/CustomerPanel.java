@@ -5,7 +5,11 @@
  */
 package Gui;
 
+import control.Data;
+import control.room;
+import control.service;
 import java.awt.*;
+import java.util.ArrayList;
 import javafx.scene.control.*;
 import javax.swing.*;
 
@@ -23,6 +27,8 @@ class CustomerPanel extends JPanel {
             JLabel CustomerNationality ;
             JLabel commingDate ;
             JLabel ccheckOut ;
+            JLabel RoomChoice;
+            JLabel ServicesChoice ;
             JTextField name ;
             JTextField id ;
             JTextField phone ;
@@ -30,34 +36,38 @@ class CustomerPanel extends JPanel {
             JTextField checkin ;
             JTextField checkout ;
             // Deficult m3lesh tell me what i do because i dont know
-            JRadioButton selectservice ;
-            JRadioButton selectroom ;
+            JList selectservice ;
+            JComboBox selectroom ;
+            //SOME ARRAY OF STRING FIRST FOR TABLE COLUMN NAME AND SECPND FOR NATIONALITY
+            String [] ColumnName={"id","name","nationality","checkin Date","checkout","Services","AssginedRoom","Phone"};
+            Data[][]CoustomerData= new Data[200][200];
+             String Nation [] ={"Egyption","Chinese","English","French","German","Italian","Japanese"
+             ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
+             ArrayList<room> SelctionRoom  = new ArrayList<>();
+             service [] serviceSelection ;
+//             this is array list from room type
             //_____________________________________________
-            JButton generateBill ;
             JButton Add ;
             JButton Delete ;
-            JTable t1 ;
+            JTable CustomerTable ;
     public CustomerPanel() {
-    
-    
-             this.setLayout(null);
-        
-        //_______________tables creation..____________________________________
-        t1 = new JTable(15,10);
-        String aColumn = "Customer";
-        t1.setToolTipText(aColumn);
-        
-        //_______Table charactaristics_________________________________
-        t1.setBackground(Color.WHITE);
-  //__________________________________________________________
-//   panel describtion
-   
-        this.setBackground(Color.LIGHT_GRAY);
+                            // Panel Colore and positions in frame
         this.setLayout(null);
-        t1.setBounds(10, 400,1000, 200);
+        this.setBackground(Color.LIGHT_GRAY);
+        //_______________tables creation..____________________________________
+        CustomerTable= new JTable(CoustomerData,ColumnName);
+        JScrollPane sc = new JScrollPane(CustomerTable);
+//        sc.setBounds(10, 400,1000, 200);
+//        this.add(sc);
+        //_______Table charactaristics_________________________________
+        CustomerTable.setBackground(Color.WHITE);
+        
+        sc.setBounds(10, 400,1000, 200);
+        
         this.setBounds(250, 10, 1020, 650);
-
-        this.add(t1);
+             this.add(sc);
+ //______________________________________________________________________
+   
          CustomerName = new JLabel("Cutomer Name") ;
         name = new JTextField(20) ;
         CustomerName.setBounds(10, 10, 150, 20);
@@ -79,7 +89,11 @@ class CustomerPanel extends JPanel {
                          this.add(CustomerPhone);
                          this.add(phone);
    //__________________________________________________________________________
-                          
+                          // icons ADD &Delete
+                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
+                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
+
+
   //____________________________________________________________________________
                                 commingDate = new JLabel("Check In Date") ;
                                     commingDate.setBounds(10, 50, 150, 20);
@@ -98,33 +112,46 @@ class CustomerPanel extends JPanel {
                           CustomerNationality = new JLabel("Cutomer Nationality") ;
                           CustomerNationality.setBounds(550, 50, 150, 20);
                           nationality = new JComboBox();
-                          nationality.addItem("Egyption");
-                          nationality.addItem("Chinese");
-                          nationality.addItem("English");
-                          nationality.addItem("French");
-                          nationality.addItem("German");
-                          nationality.addItem("Italian");
-                          nationality.addItem("Japanese");        
-                          nationality.addItem("Russian");
-                          nationality.addItem("Spanish");
-                          nationality.addItem("American");
-                          nationality.addItem("Saudi Arabian");
-                          nationality.addItem("Australian");
-                          nationality.addItem("Belgian");  
+                          for (int i =0 ;i<Nation.length;i++){
+                              
+                          nationality.addItem(Nation[i]);     
                           
+                          }
                           nationality.setBounds(670, 50, 150, 20);
                                  this.add(CustomerNationality);
                                  this.add(nationality);
-                         generateBill = new JButton ("Bill");
-                         generateBill.setBounds(250, 250, 100, 50);
-                         this.add(generateBill);
-                         Add = new JButton ("ADD");
-                         Add.setBounds(350, 250, 100, 50);
+      //______________________________Combo box to select room ________________________
+                                 RoomChoice = new JLabel("RoomChoice");
+                                 RoomChoice.setBounds(10, 100, 150, 20);
+                                 this.add(RoomChoice);
+                               selectroom = new JComboBox();
+                               int i=0;
+                               while (! SelctionRoom.isEmpty()){
+                               selectroom.addItem(SelctionRoom.get(i));
+                               i++;
+                               }
+                               selectroom.setBounds(100, 100, 150, 20);
+                               this.add(selectroom);
+     //__________________________________________________________________________________________________
+                              String data[]={"ahmed","abdalah","mohamed","ahmed","abdalah","mohamed","ahmed","abdalah","mohamed"
+                                  
+                              };
+                               ServicesChoice = new JLabel("ServiceChoice");
+                               ServicesChoice.setBounds(270, 100, 150, 20);
+                               this.add(ServicesChoice);
+                               selectservice = new JList(data);
+                               JScrollPane scrollList = new JScrollPane(selectservice);
+                               scrollList.setBounds(370, 100, 150, 50);
+                               this.add(scrollList);
+                               
+      //____________________________________________________________________________________________                       
+                         Add = new JButton (ADDIcon); // add add button && Delete
+                         Add.setBounds(10, 330, 100, 70);
                          this.add(Add);
-                         Delete = new JButton ("Delete");
-                         Delete.setBounds(450, 250, 100, 50);
+                         Delete = new JButton (DeleteIcon);
+                         Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-     
+                         
                                  
                                  
                                  

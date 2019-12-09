@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import control.Data;
 import java.awt.*;
 import javafx.scene.control.*;
 import javax.swing.*;
@@ -15,117 +16,133 @@ import javax.swing.*;
  */
 class EmployeePanel extends JPanel{
 
-           TableColumn  Customer_Name = new TableColumn("name") ;
+           TableColumn  Employee = new TableColumn("EmployeeTable") ;
         // Form
-            JLabel CustomerName ;
-            JLabel CustomerId ;
-            JLabel CustomerPhone ;
-            JLabel CustomerNationality ;
-            JLabel commingDate ;
-            JLabel ccheckOut ;
+            JLabel EmployeeName ;
+            JLabel EmployeeId ;
+            JLabel EmployeePhone ;
+            JLabel EmployeeNationality ;
+            JLabel department ;
+            JLabel Username ;
+            JLabel permission ;
+            JLabel password ;
             JTextField name ;
             JTextField id ;
             JTextField phone ;
             JComboBox nationality ;
-            JTextField checkin ;
-            JTextField checkout ;
-            // Deficult m3lesh tell me what i do because i dont know
-            JRadioButton selectservice ;
-            JRadioButton selectroom ;
+            JComboBox permissionSelection;
+            JTextField departmentField ;
+            JTextField SetUsername ;
+            JPasswordField SetPassword;
+            // String of nationality
+             String Nation [] ={"Egyption","Chinese","English","French","German","Italian","Japanese"
+             ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
+             //string of permission
+             String [] Permissions={"user_model","room_mangement","other_services"};
+             //dimentional array for data coming from database 
+             Data[][] DataEmployee = new Data[200][200];
+             //String of table column name can easily change
+            String ColumnName[]={ "id","name","email","nationality","permission"};
             //_____________________________________________
-            JButton generateBill ;
             JButton Add ;
             JButton Delete ;
-            JTable t1 ;
+            JTable EmployeeTable ;
     public EmployeePanel() {
     
     
              this.setLayout(null);
         
         //_______________tables creation..____________________________________
-        t1 = new JTable(15,10);
-        String aColumn = "Customer";
-        t1.setToolTipText(aColumn);
+//        tablecreation
+        EmployeeTable = new JTable(DataEmployee,ColumnName); 
+        JScrollPane scroll = new JScrollPane(EmployeeTable);//scroll 
+        EmployeeTable.setToolTipText("Employee");
         
-        //_______Table charactaristics_________________________________
-        t1.setBackground(Color.WHITE);
+  //_______Table charactaristics_________________________________
+        scroll.setBackground(Color.WHITE);
   //__________________________________________________________
 //   panel describtion
    
         this.setBackground(Color.LIGHT_GRAY);
         this.setLayout(null);
-        t1.setBounds(10, 400,1000, 200);
+        scroll.setBounds(10, 400,1000, 200);
         this.setBounds(250, 10, 1020, 650);
 
-        this.add(t1);
-         CustomerName = new JLabel("Cutomer Name") ;
+        this.add(scroll);
+         EmployeeName = new JLabel("Employee Name") ;
         name = new JTextField(20) ;
-        CustomerName.setBounds(10, 10, 150, 20);
-        this.add(CustomerName);
+        EmployeeName.setBounds(10, 10, 150, 20);
+        this.add(EmployeeName);
         name.setBounds(100, 10, 150, 20);
         this.add(name);
      //_____________________________________________________
-              CustomerId = new JLabel("Cutomer ID") ;
-              CustomerId.setBounds(270, 10, 150, 20);
+              EmployeeId = new JLabel("Employee ID") ;
+              EmployeeId.setBounds(270, 10, 150, 20);
               id = new JTextField(10) ;
               id.setBounds(370, 10, 150, 20);
-               this.add(CustomerId);
+               this.add(EmployeeId);
                this.add(id);
     //___________________________________________________________________
-                    CustomerPhone = new JLabel("Cutomer Phone") ;
-                    CustomerPhone.setBounds(550, 10, 150, 20);
+                    EmployeePhone = new JLabel("Employee Phone") ;
+                    EmployeePhone.setBounds(550, 10, 150, 20);
                     phone = new JTextField(20) ;
                     phone.setBounds(670, 10, 150, 20);
-                         this.add(CustomerPhone);
+                         this.add(EmployeePhone);
                          this.add(phone);
    //__________________________________________________________________________
-                          
+                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
+                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
   //____________________________________________________________________________
-                                commingDate = new JLabel("Check In Date") ;
-                                    commingDate.setBounds(10, 50, 150, 20);
-                                checkin = new JTextField(10) ;
-                                   checkin.setBounds(100, 50, 150, 20);
-                                  this.add(commingDate);
-                                   this.add(checkin);
+                                department = new JLabel("department") ;
+                                    department.setBounds(10, 50, 150, 20);
+                                departmentField = new JTextField(10) ;
+                                   departmentField.setBounds(100, 50, 150, 20);
+                                  this.add(department);
+                                   this.add(departmentField);
    //_________________________________________________________
-                                       ccheckOut = new JLabel("Check Out Date ") ;
-                                        ccheckOut.setBounds(270, 50, 150, 20);
-                                       checkout = new JTextField(10) ;
-                                        checkout.setBounds(370, 50, 150, 20);
-                                 this.add(ccheckOut);
-                                 this.add(checkout);
+                                       Username = new JLabel("Set Username ") ;
+                                        Username.setBounds(270, 50, 150, 20);
+                                       SetUsername = new JTextField(10) ;
+                                        SetUsername.setBounds(370, 50, 150, 20);
+                                 this.add(Username);
+                                 this.add(SetUsername);
      //__________________________________________________________
-                          CustomerNationality = new JLabel("Cutomer Nationality") ;
-                          CustomerNationality.setBounds(550, 50, 150, 20);
+                          EmployeeNationality = new JLabel("Cutomer Nationality") ;
+                          EmployeeNationality.setBounds(550, 50, 150, 20);
                           nationality = new JComboBox();
-                          nationality.addItem("Egyption");
-                          nationality.addItem("Chinese");
-                          nationality.addItem("English");
-                          nationality.addItem("French");
-                          nationality.addItem("German");
-                          nationality.addItem("Italian");
-                          nationality.addItem("Japanese");        
-                          nationality.addItem("Russian");
-                          nationality.addItem("Spanish");
-                          nationality.addItem("American");
-                          nationality.addItem("Saudi Arabian");
-                          nationality.addItem("Australian");
-                          nationality.addItem("Belgian");  
+                          for (int i=0;i<Nation.length;i++){
+                              nationality.addItem(Nation[i]);
+                          }
                           
                           nationality.setBounds(670, 50, 150, 20);
-                                 this.add(CustomerNationality);
+                                 this.add(EmployeeNationality);
                                  this.add(nationality);
-                         generateBill = new JButton ("Bill");
-                         generateBill.setBounds(250, 250, 100, 50);
-                         this.add(generateBill);
-                         Add = new JButton ("ADD");
-                         Add.setBounds(350, 250, 100, 50);
+     //__________________________________this is the permission  label and combobox that take data from permissions array_________________________________________-
+                                permission = new JLabel("permission");
+                                permission.setBounds(10, 100, 150, 20);
+                                this.add(permission);
+                                permissionSelection= new JComboBox();
+                                for (int i=0;i<Permissions.length;i++){
+                                permissionSelection.addItem(Permissions[i]);
+                                }
+                                permissionSelection.setBounds(100, 100, 150, 20);
+                                this.add(permissionSelection);
+     //_____________________________ now set password label and field____________________________
+                                password = new JLabel("Set Password");
+                                password.setBounds(270, 100, 150, 20);
+                                this.add(password);
+                                
+                                SetPassword = new JPasswordField();
+                                SetPassword.setBounds(370, 100, 150, 20);
+                                this.add(SetPassword);
+                                
+                                
+                             Add = new JButton (ADDIcon); // add add button && Delete
+                         Add.setBounds(10, 330, 100, 70);
                          this.add(Add);
-                         Delete = new JButton ("Delete");
-                         Delete.setBounds(450, 250, 100, 50);
+                         Delete = new JButton (DeleteIcon);
+                         Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-     
-                                 
                                  
                                  
                                  

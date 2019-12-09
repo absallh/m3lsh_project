@@ -8,6 +8,7 @@ package Gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,98 +17,80 @@ import javax.swing.JPanel;
  *
  * @author HERO
  */
-public class UserModel extends JFrame{
+public class UserModel extends Employee{
+    
+    JFrame userFrame;
     //this is three panel that contain table and form of attribute 1 to customer , 2 to employee and 3 for service
-            CustomerPanel p1 ; 
-            EmployeePanel p2 ;
-            JPanel p3 ;
+            CustomerPanel CustomerPanel ; 
+            EmployeePanel EmployeePanel ;
+            Services ServicesPanel ;
    //selction button to select mode
             JButton cust ;
             JButton emp ;
             JButton serv ;
             
+            //__________ this is 3 icons to user it with three button _______ customer , employee and services
+            ImageIcon CutomerIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Office-Customer-Male-Light-icon.png");
+            ImageIcon EmployeeIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\employee.png");
+            ImageIcon ServicesIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Network_Service_Icon_128.png");
             
-            
-              
     public UserModel() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1500, 900);
-        this.setLocation(0,0);
-        this.setTitle("Login");
-        this.getContentPane().setBackground(Color.GRAY);
-        this.setLayout(null);
+        userFrame = new JFrame();
+}
+    
+    
+    @Override
+    public void work (){
+        userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        userFrame.setSize(1500, 900);
+        userFrame.setLocation(0,0);
+        userFrame.setTitle("Login");
+        userFrame.getContentPane().setBackground(Color.GRAY);
+        userFrame.setLayout(null);
         
 
   //__________________________________________________________
 //   panel describtion
    
-        p1 = new CustomerPanel() ;
+        CustomerPanel = new CustomerPanel() ;
         
-        p2 = new EmployeePanel();
+        EmployeePanel = new EmployeePanel();
 
-        p3 = new Services();
+        ServicesPanel = new Services();
 
-        p1.setBounds(250, 10, 1020, 650);
-        p2.setBounds(250, 10, 1020, 650);
-        p3.setBounds(250, 10, 1020, 650);
+        CustomerPanel.setBounds(250, 10, 1020, 650);
+        EmployeePanel.setBounds(250, 10, 1020, 650);
+        ServicesPanel.setBounds(250, 10, 1020, 650);
 
 ////______________________________________________________
-        cust = new JButton("Customers");
-        myhandler hand = new myhandler (); // create  Action handling  hand
+     // create  Action handling  hand
+        myhandler hand = new myhandler ();
+        
+        cust = new JButton(CutomerIcon);
+
         cust.addActionListener(hand);
         
-        emp = new JButton("Employees");
+        emp = new JButton(EmployeeIcon);
         
         emp.addActionListener(hand);
         
-        serv = new JButton("Services");
+        serv = new JButton(ServicesIcon);
         
         serv.addActionListener(hand);
         
         cust.setBounds(10,10, 200,150);
         emp.setBounds(10, 240, 200, 150);
         serv.setBounds(10,490, 200, 150);
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         // add to frame 
-        this.add(cust);
-        this.add(emp);
-        this.add(serv);
-        this.add(p1);
-        this.add(p2);
-        this.add(p3);
+        userFrame.add(cust);
+        userFrame.add(emp);
+        userFrame.add(serv);
+        userFrame.add(CustomerPanel);
+        userFrame.add(EmployeePanel);
+        userFrame.add(ServicesPanel);        
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-}
-    
-    
-    
+        userFrame.setVisible(true);
+    }
     
     
     class myhandler implements ActionListener {
@@ -117,21 +100,21 @@ public class UserModel extends JFrame{
             Object ss = e.getSource();
             if (ss==cust)
             {
-                p1.show(true);
-                p2.show(false);
-                p3.show(false);
+                CustomerPanel.show(true);
+                EmployeePanel.show(false);
+                ServicesPanel.show(false);
             }
             else if (ss== emp)
             {
-                p1.show(false);
-                p2.show(true);
-                p3.show(false);
+                CustomerPanel.show(false);
+                EmployeePanel.show(true);
+                ServicesPanel.show(false);
             }
             else if (ss== serv)
             {
-                p1.show(false);
-                p2.show(false);
-                p3.show(true);
+                CustomerPanel.show(false);
+                EmployeePanel.show(false);
+                ServicesPanel.show(true);
                         
             }        
       }

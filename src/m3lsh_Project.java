@@ -1,8 +1,8 @@
-import Gui.UserModel;
+import Gui.*;
 
-public class m3lsh_project {
+public class    m3lsh_Project {
     public static void main(String []args){
-        UserModel user = new UserModel();
-        user.setVisible(true);
+        RoomManagement start = new RoomManagement();
+        start.work();
     }
 }

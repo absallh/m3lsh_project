@@ -1,7 +1,7 @@
 package control;
 
 public class service {
-    private String service_name;
+    public String service_name;
     private double price;
     private String description;
     private int usage_per_day;

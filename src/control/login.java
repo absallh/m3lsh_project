@@ -1,12 +1,14 @@
 package control;
 
+import Gui.*;
+
 public class login {
     private String premssion;
     private boolean athuntcated;
     private Data login_Data;
     private String user_name;
     private String password;
-    private employee user;
+    private Employee user;
     
     public login (){
         login_Data = new Data();
@@ -29,13 +31,13 @@ public class login {
         
         switch (premssion){//we will change all of that to run the Gui
             case "user_model":
-                user = new user_model();
+                user = new UserModel();
                 break;
             case "room_mangement":
-                user = new room_mangement();
+                //user = new room_mangement();
                 break;
             case "other_services":
-                user = new other_services();
+                //user = new other_services();
                 break;
         }
         

@@ -7,7 +7,7 @@ public class Data {
     }
     
     public String getEmployeePremission(String user_name, String password){
-        return "other_services";
+        return "user_model";
     }
     
     public void writeEmployee (int id, String name, String email, String phone, 

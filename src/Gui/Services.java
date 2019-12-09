@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import control.Data;
 import java.awt.*;
 import javafx.scene.control.*;
 import javax.swing.*;
@@ -17,116 +18,73 @@ class Services extends JPanel {
 
         TableColumn  Customer_Name = new TableColumn("name") ;
         // Form
-            JLabel CustomerName ;
-            JLabel CustomerId ;
-            JLabel CustomerPhone ;
-            JLabel CustomerNationality ;
-            JLabel commingDate ;
-            JLabel ccheckOut ;
+            JLabel service_name ;
+            JLabel Serviceprice ;
+            JLabel description ;
             JTextField name ;
-            JTextField id ;
-            JTextField phone ;
-            JComboBox nationality ;
-            JTextField checkin ;
-            JTextField checkout ;
-            // Deficult m3lesh tell me what i do because i dont know
-            JRadioButton selectservice ;
-            JRadioButton selectroom ;
+            JTextField price ;
+            JTextField describe ;
+            
             //_____________________________________________
-            JButton generateBill ;
             JButton Add ;
             JButton Delete ;
-            JTable t1 ;
+            JTable SeviceTable ;
+            // two Array one from database another String for column name
+            Data[][] ServicesData = new Data[100][100];
+            String[]ColumnName ={"Service Name","Service price","Service Describtion"};
     public Services() {
-    
-    
              this.setLayout(null);
-        
+             this.setBackground(Color.LIGHT_GRAY);
+             this.setBounds(250, 10, 1020, 650);
         //_______________tables creation..____________________________________
-        t1 = new JTable(15,10);
-        String aColumn = "Customer";
-        t1.setToolTipText(aColumn);
+        SeviceTable = new JTable(ServicesData,ColumnName);
+        JScrollPane scroll = new JScrollPane(SeviceTable);
         
         //_______Table charactaristics_________________________________
-        t1.setBackground(Color.WHITE);
+        SeviceTable.setBackground(Color.WHITE);
   //__________________________________________________________
 //   panel describtion
    
-        this.setBackground(Color.LIGHT_GRAY);
-        this.setLayout(null);
-        t1.setBounds(10, 400,1000, 200);
-        this.setBounds(250, 10, 1020, 650);
 
-        this.add(t1);
-         CustomerName = new JLabel("Cutomer Name") ;
+        scroll.setBounds(10, 400,1000, 200);
+
+        this.add(scroll);
+        
+      //__________________________________________________
+         service_name = new JLabel("service Name") ;
         name = new JTextField(20) ;
-        CustomerName.setBounds(10, 10, 150, 20);
-        this.add(CustomerName);
+        service_name.setBounds(10, 10, 150, 20);
+        this.add(service_name);
         name.setBounds(100, 10, 150, 20);
         this.add(name);
      //_____________________________________________________
-              CustomerId = new JLabel("Cutomer ID") ;
-              CustomerId.setBounds(270, 10, 150, 20);
-              id = new JTextField(10) ;
-              id.setBounds(370, 10, 150, 20);
-               this.add(CustomerId);
-               this.add(id);
+              Serviceprice = new JLabel("Service price") ;
+              Serviceprice.setBounds(270, 10, 150, 20);
+              price = new JTextField(10) ;
+              price.setBounds(370, 10, 150, 20);
+               this.add(Serviceprice);
+               this.add(price);
     //___________________________________________________________________
-                    CustomerPhone = new JLabel("Cutomer Phone") ;
-                    CustomerPhone.setBounds(550, 10, 150, 20);
-                    phone = new JTextField(20) ;
-                    phone.setBounds(670, 10, 150, 20);
-                         this.add(CustomerPhone);
-                         this.add(phone);
+                    description = new JLabel("Service description") ;
+                    description.setBounds(10, 50, 150, 20);
+                    describe = new JTextField() ;
+                    describe.setBounds(200, 50, 150, 20);
+                         this.add(description);
+                         this.add(describe);
    //__________________________________________________________________________
-                          
+                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\plus.png");
+                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
   //____________________________________________________________________________
-                                commingDate = new JLabel("Check In Date") ;
-                                    commingDate.setBounds(10, 50, 150, 20);
-                                checkin = new JTextField(10) ;
-                                   checkin.setBounds(100, 50, 150, 20);
-                                  this.add(commingDate);
-                                   this.add(checkin);
-   //_________________________________________________________
-                                       ccheckOut = new JLabel("Check Out Date ") ;
-                                        ccheckOut.setBounds(270, 50, 150, 20);
-                                       checkout = new JTextField(10) ;
-                                        checkout.setBounds(370, 50, 150, 20);
-                                 this.add(ccheckOut);
-                                 this.add(checkout);
-     //__________________________________________________________
-                          CustomerNationality = new JLabel("Cutomer Nationality") ;
-                          CustomerNationality.setBounds(550, 50, 150, 20);
-                          nationality = new JComboBox();
-                          nationality.addItem("Egyption");
-                          nationality.addItem("Chinese");
-                          nationality.addItem("English");
-                          nationality.addItem("French");
-                          nationality.addItem("German");
-                          nationality.addItem("Italian");
-                          nationality.addItem("Japanese");        
-                          nationality.addItem("Russian");
-                          nationality.addItem("Spanish");
-                          nationality.addItem("American");
-                          nationality.addItem("Saudi Arabian");
-                          nationality.addItem("Australian");
-                          nationality.addItem("Belgian");  
-                          
-                          nationality.setBounds(670, 50, 150, 20);
-                                 this.add(CustomerNationality);
-                                 this.add(nationality);
-                         generateBill = new JButton ("Bill");
-                         generateBill.setBounds(250, 250, 100, 50);
-                         this.add(generateBill);
-                         Add = new JButton ("ADD");
-                         Add.setBounds(350, 250, 100, 50);
+
+                         Add = new JButton (ADDIcon); // add add button && Delete
+                         Add.setBounds(10, 330, 100, 70);
                          this.add(Add);
-                         Delete = new JButton ("Delete");
-                         Delete.setBounds(450, 250, 100, 50);
+                         Delete = new JButton (DeleteIcon);
+                         Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
      
                                  
-                                 
+                           this.setVisible(true);
                                  
                                  
     }              
