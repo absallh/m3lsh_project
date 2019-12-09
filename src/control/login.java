@@ -34,7 +34,7 @@ public class login {
                 user = new UserModel();
                 break;
             case "room_mangement":
-                //user = new room_mangement();
+                user = new RoomManagement();
                 break;
             case "other_services":
                 //user = new other_services();

@@ -46,7 +46,7 @@ public class RoomManagement extends Employee {
         RoomFrame.setLayout(null);
         
         GustPanel = new Gust_management();
-//        RoomPanel = new Room_management();
+        RoomPanel = new Room_management();
         
         myhandler hand = new myhandler ();
         
@@ -74,9 +74,6 @@ public class RoomManagement extends Employee {
         
         
         RoomFrame.setVisible(true);
-        
-
-    
     }
   class myhandler implements ActionListener {
 
@@ -85,13 +82,13 @@ public class RoomManagement extends Employee {
             Object ss = e.getSource();
             if (ss==Gust)
             {
-                GustPanel.show(true);
-                RoomPanel.show(false);
+                GustPanel.setVisible(true);
+                RoomPanel.setVisible(false);
             }
             else if (ss== Room)
             {
-                GustPanel.show(false);
-                RoomPanel.show(true);
+                GustPanel.setVisible(false);
+                RoomPanel.setVisible(true);
             }
         }
      }

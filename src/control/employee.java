@@ -42,4 +42,9 @@ public class employee extends person {
     void delete(int id) {
         
     }
+
+    @Override
+    void add() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

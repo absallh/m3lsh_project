@@ -26,7 +26,7 @@ public class Room_management extends JPanel{
       String []filter ={"None , Busy , NotBusy , Type"};
       JComboBox AssignRoom ;
       JLabel Assign_Room ;
-      String []roomData ;
+      String []roomData = {"Room number", "Type"};
 
     public Room_management() {
         this.setLayout(null);
@@ -57,7 +57,7 @@ public class Room_management extends JPanel{
                       this.add(Assign_Room);
                       AssignRoom = new JComboBox();
                       for(int i =0;i<roomData.length;i++){
-                      AssignRoom.addItem(roomData[i]);
+                        AssignRoom.addItem(roomData[i]);
                       }
                       Assign_Room.setBounds(500, 150, 150, 150);
                       this.add(Assign_Room);
