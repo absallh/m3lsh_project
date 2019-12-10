@@ -27,7 +27,7 @@ public class login {
     
     public void enterTheProgram (){
         //get user premission from db
-        premssion = login_Data.getEmployeePremission(user_name, password);
+        premssion = login_Data.getEmployeePremission();
         
         switch (premssion){//we will change all of that to run the Gui
             case "user_model":
