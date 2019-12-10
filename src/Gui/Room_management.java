@@ -23,25 +23,25 @@ public class Room_management extends JPanel{
       String [] ColumnName={"Room Name","Room Number ","Room Price","Busy OR Not"};
       Data[][]RoomData= new Data[100][100];
       JTable ROOMTable ;
-      String []filter ={"None , Busy , NotBusy , Type"};
+      String []filter ={"None" , "Busy ", "NotBusy" , "Type"};
       JComboBox AssignRoom ;
       JLabel Assign_Room ;
       String []roomData = {"Room number", "Type"};
-
+      Color c =new Color(0,255,127);
     public Room_management() {
         this.setLayout(null);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(c);
         this.setBounds(250, 10, 1020, 650);
                 //_______________tables creation..____________________________________
         ROOMTable= new JTable(RoomData,ColumnName);
                 //_______Table charactaristics________
         JScrollPane sc = new JScrollPane(ROOMTable);
-        sc.setBounds(220, 400,1000, 200);
+        sc.setBounds(10, 50,1000, 200);
            ROOMTable.setBackground(Color.WHITE);
         this.add(sc);
      //________________________________ filter room with combobox_________________________________________
              Filter = new JLabel("Filter ") ;
-                          Filter.setBounds(650, 30, 120, 20);
+                          Filter.setBounds(750, 30, 100, 20);
                           filterrooms = new JComboBox();
                           for (int i =0 ;i<filter.length;i++){
                               
@@ -53,14 +53,14 @@ public class Room_management extends JPanel{
                                  this.add(filterrooms);
       //_____________________________________________________________________________
                       Assign_Room =new JLabel("Assign Room to the Gust");
-                      Assign_Room.setBounds(500, 100, 150, 150);
+                      Assign_Room.setBounds(210, 350, 200, 150);
                       this.add(Assign_Room);
                       AssignRoom = new JComboBox();
                       for(int i =0;i<roomData.length;i++){
                         AssignRoom.addItem(roomData[i]);
                       }
-                      Assign_Room.setBounds(500, 150, 150, 150);
-                      this.add(Assign_Room);
+                      AssignRoom.setBounds(200, 450, 150, 20);
+                      this.add(AssignRoom);
                       
                                  
                                  

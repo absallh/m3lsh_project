@@ -26,11 +26,9 @@ public class RoomManagement extends Employee {
             JButton Gust ;
             JButton Room ;
             
-            //__________ this is 3 icons to user it with three button _______ customer , employee and services
-//            ImageIcon CutomerIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Office-Customer-Male-Light-icon.png");
-//            ImageIcon EmployeeIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\employee.png");
-//            ImageIcon ServicesIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Network_Service_Icon_128.png");
-//            
+            //__________ this is 2 icons to user it with three button _______ room   gust 
+          ImageIcon GustIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\guest-list.png");
+          ImageIcon RoomIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\key-card.png");         
     public RoomManagement() {
         RoomFrame = new JFrame();
     }
@@ -38,11 +36,12 @@ public class RoomManagement extends Employee {
     
     @Override
     public void work (){
+        Color c =new Color(0,191,255);
         RoomFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         RoomFrame.setSize(1500, 900);
         RoomFrame.setLocation(0,0);
         RoomFrame.setTitle("Login");
-        RoomFrame.getContentPane().setBackground(Color.GRAY);
+        RoomFrame.getContentPane().setBackground(c);
         RoomFrame.setLayout(null);
         
         GustPanel = new Gust_management();
@@ -50,22 +49,22 @@ public class RoomManagement extends Employee {
         
         myhandler hand = new myhandler ();
         
-        Gust = new JButton("Gust");
+        Gust = new JButton(GustIcon);
 
         Gust.addActionListener(hand);
         
-        Room = new JButton("Room");
+        Room = new JButton(RoomIcon);
         
         Room.addActionListener(hand);
         
         
         
-//        
-//        GustPanel.setBounds(250, 10, 1020, 650);
-//        RoomPanel.setBounds(250, 10, 1020, 650);
+        
+        GustPanel.setBounds(250, 10, 1020, 650);
+        RoomPanel.setBounds(250, 10, 1020, 650);
         
         Gust.setBounds(10,10, 200,300);
-        Room.setBounds(10, 300, 200, 300);
+        Room.setBounds(10, 350, 200, 300);
         
         RoomFrame.add(Gust);
         RoomFrame.add(Room);

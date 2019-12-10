@@ -50,10 +50,12 @@ class CustomerPanel extends JPanel {
             JButton Add ;
             JButton Delete ;
             JTable CustomerTable ;
+                Color c = new Color(173,216,230);
+
     public CustomerPanel() {
                             // Panel Colore and positions in frame
         this.setLayout(null);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(c);
         //_______________tables creation..____________________________________
         CustomerTable= new JTable(CoustomerData,ColumnName);
         JScrollPane sc = new JScrollPane(CustomerTable);

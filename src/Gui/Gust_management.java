@@ -31,11 +31,11 @@ public class Gust_management extends JPanel {
      JButton Bill ;
     String [] ColumnName={"Customer ID","Customer Name ","Room Number","checkin Date"," Near checkout","Services",};
             Data[][]CoustomerData= new Data[200][200];
-            
+         Color c =new Color(0,255,127);    
      JTable GustTable ;
     public Gust_management() {
         this.setLayout(null);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(c);
         this.setBounds(250, 10, 1020, 650);
                 //_______________tables creation..____________________________________
         GustTable= new JTable(CoustomerData,ColumnName);

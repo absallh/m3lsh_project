@@ -48,7 +48,7 @@ class EmployeePanel extends JPanel{
             JButton Delete ;
             JTable EmployeeTable ;
     public EmployeePanel() {
-    
+    Color c = new Color(173,216,230);
     
              this.setLayout(null);
         
@@ -59,11 +59,11 @@ class EmployeePanel extends JPanel{
         EmployeeTable.setToolTipText("Employee");
         
   //_______Table charactaristics_________________________________
-        scroll.setBackground(Color.WHITE);
+        scroll.setBackground(Color.LIGHT_GRAY);
   //__________________________________________________________
 //   panel describtion
    
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(c);
         this.setLayout(null);
         scroll.setBounds(10, 400,1000, 200);
         this.setBounds(250, 10, 1020, 650);

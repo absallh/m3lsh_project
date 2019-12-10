@@ -32,9 +32,11 @@ class Services extends JPanel {
             // two Array one from database another String for column name
             Data[][] ServicesData = new Data[100][100];
             String[]ColumnName ={"Service Name","Service price","Service Describtion"};
+                Color c = new Color(173,216,230);
+
     public Services() {
              this.setLayout(null);
-             this.setBackground(Color.LIGHT_GRAY);
+             this.setBackground(c);
              this.setBounds(250, 10, 1020, 650);
         //_______________tables creation..____________________________________
         SeviceTable = new JTable(ServicesData,ColumnName);
