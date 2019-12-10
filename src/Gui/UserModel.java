@@ -23,7 +23,7 @@ public class UserModel extends Employee{
     //this is three panel that contain table and form of attribute 1 to customer , 2 to employee and 3 for service
             CustomerPanel CustomerPanel ; 
             EmployeePanel EmployeePanel ;
-            Services ServicesPanel ;
+            Services_panel ServicesPanel ;
    //selction button to select mode
             JButton cust ;
             JButton emp ;
@@ -56,7 +56,7 @@ public class UserModel extends Employee{
         
         EmployeePanel = new EmployeePanel();
 
-        ServicesPanel = new Services();
+        ServicesPanel = new Services_panel();
 
         CustomerPanel.setBounds(250, 10, 1020, 650);
         EmployeePanel.setBounds(250, 10, 1020, 650);

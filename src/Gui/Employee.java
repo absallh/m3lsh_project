@@ -13,6 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class Employee {
     public void work (){
-        JOptionPane.showMessageDialog(null, "Call the admin", "Error", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Call the admin to set your premission", "Error", JOptionPane.PLAIN_MESSAGE);
     }
 }

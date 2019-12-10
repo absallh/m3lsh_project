@@ -5,10 +5,13 @@
  */
 package Gui;
 
+import Database.CustomerData;
 import control.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -29,16 +32,16 @@ public class Gust_management extends JPanel {
      JTextField checkoutDate ;
      JCheckBox NearCheckout;
      JButton Bill ;
-    String [] ColumnName={"Customer ID","Customer Name ","Room Number","checkin Date"," Near checkout","Services",};
-            Data[][]CoustomerData= new Data[200][200];
-         Color c =new Color(0,255,127);    
+    String [] ColumnName={"Customer ID","Customer Name ","Room Number","checkin Date","checkout Date","Services"};
+            CustomerData CoustomerData= new CustomerData();
+         Color c =new Color(0,255,127); 
      JTable GustTable ;
     public Gust_management() {
         this.setLayout(null);
         this.setBackground(c);
         this.setBounds(250, 10, 1020, 650);
                 //_______________tables creation..____________________________________
-        GustTable= new JTable(CoustomerData,ColumnName);
+        GustTable= new JTable(CoustomerData);
         JScrollPane sc = new JScrollPane(GustTable);
         sc.setBounds(220, 400,1000, 200);
         this.add(sc);
@@ -52,6 +55,7 @@ public class Gust_management extends JPanel {
         NearCheckout = new JCheckBox ("NearCheckOut");
         NearCheckout.setBounds(850, 30, 120, 20);
         this.add(NearCheckout);
+        NearCheckout.addItemListener(new nearCheckout_listener());
         
         //_____________________________________________________________
             comming_Date = new JLabel("Check In Date") ;
@@ -78,6 +82,13 @@ public class Gust_management extends JPanel {
                               
         this.setVisible(true);
     }
+
+    private static class nearCheckout_listener implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED){
+            }
+    }}
     
      public class help implements ActionListener {
 

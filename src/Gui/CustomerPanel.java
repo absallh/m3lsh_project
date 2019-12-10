@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import control.Data;
+import Database.CustomerData;
 import control.room;
 import control.service;
 import java.awt.*;
@@ -40,7 +40,7 @@ class CustomerPanel extends JPanel {
             JComboBox selectroom ;
             //SOME ARRAY OF STRING FIRST FOR TABLE COLUMN NAME AND SECPND FOR NATIONALITY
             String [] ColumnName={"id","name","nationality","checkin Date","checkout","Services","AssginedRoom","Phone"};
-            Data[][]CoustomerData= new Data[200][200];
+            CustomerData CoustomerData= new CustomerData();
              String Nation [] ={"Egyption","Chinese","English","French","German","Italian","Japanese"
              ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
              ArrayList<room> SelctionRoom  = new ArrayList<>();
@@ -57,10 +57,12 @@ class CustomerPanel extends JPanel {
         this.setLayout(null);
         this.setBackground(c);
         //_______________tables creation..____________________________________
-        CustomerTable= new JTable(CoustomerData,ColumnName);
-        JScrollPane sc = new JScrollPane(CustomerTable);
-//        sc.setBounds(10, 400,1000, 200);
-//        this.add(sc);
+        CustomerTable= new JTable(CoustomerData);
+        JScrollPane sc = new JScrollPane(CustomerTable, 
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sc.setBounds(10, 400,1000, 200);
+        this.add(sc);
         //_______Table charactaristics_________________________________
         CustomerTable.setBackground(Color.WHITE);
         

@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import control.Data;
+import Database.EmployeeData;
 import java.awt.*;
 import javafx.scene.control.*;
 import javax.swing.*;
@@ -40,7 +40,7 @@ class EmployeePanel extends JPanel{
              //string of permission
              String [] Permissions={"user_model","room_mangement","other_services"};
              //dimentional array for data coming from database 
-             Data[][] DataEmployee = new Data[200][200];
+             EmployeeData DataEmployee = new EmployeeData();
              //String of table column name can easily change
             String ColumnName[]={ "id","name","email","nationality","permission"};
             //_____________________________________________
@@ -54,7 +54,7 @@ class EmployeePanel extends JPanel{
         
         //_______________tables creation..____________________________________
 //        tablecreation
-        EmployeeTable = new JTable(DataEmployee,ColumnName); 
+        EmployeeTable = new JTable(DataEmployee); 
         JScrollPane scroll = new JScrollPane(EmployeeTable);//scroll 
         EmployeeTable.setToolTipText("Employee");
         

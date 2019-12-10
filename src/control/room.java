@@ -4,7 +4,7 @@ public class room {
     private int room_number;
     private String room_type;
     private boolean busy;
-     private Data room_Data;
+   //  private Data room_Data;
 
     public int getRoom_number() {
         return room_number;

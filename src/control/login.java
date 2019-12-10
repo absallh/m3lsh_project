@@ -1,17 +1,18 @@
 package control;
 
+import Database.login_Data;
 import Gui.*;
 
 public class login {
     private String premssion;
     private boolean athuntcated;
-    private Data login_Data;
+    private login_Data  login_Data;
     private String user_name;
     private String password;
     private Employee user;
     
     public login (){
-        login_Data = new Data();
+        login_Data = new login_Data();
         athuntcated = false;
     }
     
@@ -38,6 +39,9 @@ public class login {
                 break;
             case "other_services":
                 //user = new other_services();
+                break;
+            default :
+                user = new Employee();
                 break;
         }
         

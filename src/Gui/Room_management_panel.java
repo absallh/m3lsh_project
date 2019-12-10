@@ -5,7 +5,8 @@
  */
 package Gui;
 
-import control.Data;
+
+import Database.EmployeeData;
 import control.room;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -17,18 +18,18 @@ import javax.swing.JTable;
  *
  * @author HERO
  */
-public class Room_management extends JPanel{
+public class Room_management_panel extends JPanel{
       JLabel Filter ;
       JComboBox filterrooms ;
       String [] ColumnName={"Room Name","Room Number ","Room Price","Busy OR Not"};
-      Data[][]RoomData= new Data[100][100];
+      EmployeeData[][]RoomData= new EmployeeData[100][100];
       JTable ROOMTable ;
       String []filter ={"None" , "Busy ", "NotBusy" , "Type"};
       JComboBox AssignRoom ;
       JLabel Assign_Room ;
       String []roomData = {"Room number", "Type"};
       Color c =new Color(0,255,127);
-    public Room_management() {
+    public Room_management_panel() {
         this.setLayout(null);
         this.setBackground(c);
         this.setBounds(250, 10, 1020, 650);
@@ -60,10 +61,7 @@ public class Room_management extends JPanel{
                         AssignRoom.addItem(roomData[i]);
                       }
                       AssignRoom.setBounds(200, 450, 150, 20);
-                      this.add(AssignRoom);
-                      
-                                 
-                                 
+                      this.add(AssignRoom);        
         
         this.setVisible(true);
     }

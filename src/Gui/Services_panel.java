@@ -5,7 +5,8 @@
  */
 package Gui;
 
-import control.Data;
+
+import Database.Service_Data;
 import java.awt.*;
 import javafx.scene.control.*;
 import javax.swing.*;
@@ -14,7 +15,7 @@ import javax.swing.*;
  *
  * @author HERO
  */
-class Services extends JPanel {
+class Services_panel extends JPanel {
 
         TableColumn  Customer_Name = new TableColumn("name") ;
         // Form
@@ -30,16 +31,16 @@ class Services extends JPanel {
             JButton Delete ;
             JTable SeviceTable ;
             // two Array one from database another String for column name
-            Data[][] ServicesData = new Data[100][100];
+            Service_Data ServicesData = new Service_Data();
             String[]ColumnName ={"Service Name","Service price","Service Describtion"};
                 Color c = new Color(173,216,230);
 
-    public Services() {
+    public Services_panel() {
              this.setLayout(null);
              this.setBackground(c);
              this.setBounds(250, 10, 1020, 650);
         //_______________tables creation..____________________________________
-        SeviceTable = new JTable(ServicesData,ColumnName);
+        SeviceTable = new JTable(ServicesData);
         JScrollPane scroll = new JScrollPane(SeviceTable);
         
         //_______Table charactaristics_________________________________

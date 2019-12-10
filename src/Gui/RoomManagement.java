@@ -20,18 +20,21 @@ public class RoomManagement extends Employee {
      JFrame RoomFrame;
     //this is two panel that contain table and form of attribute 1 to gust and anothr for room
            Gust_management GustPanel  ; 
-           Room_management RoomPanel ;
+           Room_management_panel RoomPanel ;
 
    //selction button to select mode
             JButton Gust ;
             JButton Room ;
             
             //__________ this is 2 icons to user it with three button _______ room   gust 
-          ImageIcon GustIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\guest-list.png");
-          ImageIcon RoomIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\key-card.png");         
-    public RoomManagement() {
-        RoomFrame = new JFrame();
-    }
+          ImageIcon GustIcon = 
+                  new ImageIcon("D:\\F School\\Programming Language 2\\m3lsh Project\\m3lsh_project\\src\\guest-list.png");
+          ImageIcon RoomIcon = 
+                  new ImageIcon("D:\\F School\\Programming Language 2\\m3lsh Project\\m3lsh_project\\src\\key-card.png");
+    
+          public RoomManagement() {
+            RoomFrame = new JFrame();
+          }
     
     
     @Override
@@ -40,12 +43,12 @@ public class RoomManagement extends Employee {
         RoomFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         RoomFrame.setSize(1500, 900);
         RoomFrame.setLocation(0,0);
-        RoomFrame.setTitle("Login");
+        RoomFrame.setTitle("Room mangement");
         RoomFrame.getContentPane().setBackground(c);
         RoomFrame.setLayout(null);
         
         GustPanel = new Gust_management();
-        RoomPanel = new Room_management();
+        RoomPanel = new Room_management_panel();
         
         myhandler hand = new myhandler ();
         
