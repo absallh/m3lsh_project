@@ -68,10 +68,10 @@ class Services_panel extends JPanel {
                this.add(Serviceprice);
                this.add(price);
     //___________________________________________________________________
-                    description = new JLabel("Service description") ;
+                    description = new JLabel("description") ;
                     description.setBounds(10, 50, 150, 20);
                     describe = new JTextField() ;
-                    describe.setBounds(200, 50, 150, 20);
+                    describe.setBounds(100, 50, 150, 20);
                          this.add(description);
                          this.add(describe);
    //__________________________________________________________________________

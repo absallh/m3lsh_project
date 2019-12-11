@@ -43,7 +43,7 @@ class CustomerPanel extends JPanel {
             JList SelectedServices;
             JButton Click;
             JComboBox selectroom ;
-            
+             JScrollPane S1 ;
             //SOME ARRAY OF STRING FIRST FOR TABLE COLUMN NAME AND SECPND FOR NATIONALITY
 //                                       String [] ColumnName={"id","name","nationality","checkin Date","checkout","Services","AssginedRoom","Phone"};
             CustomerData CoustomerData= new CustomerData();
@@ -51,8 +51,8 @@ class CustomerPanel extends JPanel {
              ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
              ArrayList<room> SelctionRoom  = new ArrayList<>();
              Service_Data  service = new Service_Data();
-             //Should put Array of Object about service 
-             String [] serviceSelection ={"m3lesh","m3lesh","m3lesh","m3lesh","m3lesh","m3lesh","m3lesh"};
+             //Should put Array of Object about service >>
+              String [] array ={"ahmed","mohamed","hossam ","osama","amr","mostafa","ahmed","mohamed","hossam ","osama","amr","mostafa"};
 //             this is array list from room type
             //_____________________________________________
             JButton Add ;
@@ -104,7 +104,7 @@ class CustomerPanel extends JPanel {
                           // icons ADD &Delete
                 ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
                 ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
-
+                ImageIcon  SelectIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\tap.png");
 
   //____________________________________________________________________________
                                 commingDate = new JLabel("Check In Date") ;
@@ -146,13 +146,16 @@ class CustomerPanel extends JPanel {
                                this.add(selectroom);
      //__________________________________________________________________________________________________
 
-                            ChoiceService = new JList(serviceSelection);
+                            ChoiceService = new JList(array);
+                            ChoiceService.setVisibleRowCount(5);
+                            ChoiceService.setFixedCellHeight(10);
+                            ChoiceService.setFixedCellWidth(100);
                             ChoiceService.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-                            JScrollPane S1 =new JScrollPane(ServicesChoice);
-                            S1.setBounds(270, 100, 200, 100);
+                            S1 =new JScrollPane(ChoiceService);
+                            S1.setBounds(20, 200, 200, 100);
                             this.add (S1);
                             
-                            Click = new JButton("Click--> to choice");
+                            Click = new JButton(SelectIcon);
                             Click.addActionListener( new ActionListener(){
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -161,7 +164,7 @@ class CustomerPanel extends JPanel {
 
               }
         );
-                          Click.setBounds(270, 250, 100, 50);
+                          Click.setBounds(220, 200, 200, 100);
                           this.add(Click);
                           SelectedServices = new JList();
                           SelectedServices.setVisibleRowCount(5);
@@ -170,19 +173,11 @@ class CustomerPanel extends JPanel {
                           SelectedServices.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
                           
                           JScrollPane S2 =new JScrollPane(SelectedServices);
-                           S2.setBounds(270, 400, 200, 100);
+                           S2.setBounds(420, 200, 200, 100);
                             this.add (S2);
                                  
                                  
-//                                 
-//                               ServicesChoice = new JLabel("ServiceChoice");
-//                               ServicesChoice.setBounds(270, 100, 150, 20);
-//                               this.add(ServicesChoice);
-//                               selectservice = new JList(service);
-//                               JScrollPane scrollList = new JScrollPane(selectservice);
-//                               scrollList.setBounds(370, 100, 150, 50);
-//                               this.add(scrollList);
-//                               
+
       //____________________________________________________________________________________________                       
                          Add = new JButton (ADDIcon); // add add button && Delete
                          Add.setBounds(10, 330, 100, 70);

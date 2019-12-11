@@ -24,15 +24,18 @@ public class UserModel extends Employee{
             CustomerPanel CustomerPanel ; 
             EmployeePanel EmployeePanel ;
             Services_panel ServicesPanel ;
+            Room_Panel RoomPanel;
    //selction button to select mode
             JButton cust ;
             JButton emp ;
             JButton serv ;
+            JButton Room ;
             
             //__________ this is 3 icons to user it with three button _______ customer , employee and services
             ImageIcon CutomerIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Office-Customer-Male-Light-icon.png");
             ImageIcon EmployeeIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\employee.png");
             ImageIcon ServicesIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Network_Service_Icon_128.png");
+            ImageIcon RoomIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\icons8-room-64.png");
             
     public UserModel() {
         userFrame = new JFrame();
@@ -57,11 +60,13 @@ public class UserModel extends Employee{
         EmployeePanel = new EmployeePanel();
 
         ServicesPanel = new Services_panel();
-
+        
+        RoomPanel = new  Room_Panel ();
+        
         CustomerPanel.setBounds(250, 10, 1020, 650);
         EmployeePanel.setBounds(250, 10, 1020, 650);
         ServicesPanel.setBounds(250, 10, 1020, 650);
-
+        RoomPanel.setBounds(250, 10, 1020, 650);
 ////______________________________________________________
      // create  Action handling  hand
         myhandler hand = new myhandler ();
@@ -78,17 +83,23 @@ public class UserModel extends Employee{
         
         serv.addActionListener(hand);
         
+        Room = new JButton(RoomIcon);
+        Room.addActionListener(hand);
+        
         cust.setBounds(10,10, 200,150);
-        emp.setBounds(10, 240, 200, 150);
-        serv.setBounds(10,490, 200, 150);
+        emp.setBounds(10, 180, 200, 150);
+        serv.setBounds(10,360, 200, 150);
+        Room.setBounds(10,540, 200, 150);
         // add to frame 
         userFrame.add(cust);
         userFrame.add(emp);
         userFrame.add(serv);
+        userFrame.add(Room);
         userFrame.add(CustomerPanel);
         userFrame.add(EmployeePanel);
         userFrame.add(ServicesPanel);        
-        
+        userFrame.add(RoomPanel);    
+         
         userFrame.setVisible(true);
     }
     
@@ -103,20 +114,29 @@ public class UserModel extends Employee{
                 CustomerPanel.show(true);
                 EmployeePanel.show(false);
                 ServicesPanel.show(false);
+                RoomPanel.show(false);
             }
             else if (ss== emp)
             {
                 CustomerPanel.show(false);
                 EmployeePanel.show(true);
                 ServicesPanel.show(false);
+                RoomPanel.show(false);
             }
             else if (ss== serv)
             {
                 CustomerPanel.show(false);
                 EmployeePanel.show(false);
                 ServicesPanel.show(true);
-                        
-            }        
+                RoomPanel.show(false);        
+            }
+            else if (ss== Room)
+            {
+                 CustomerPanel.show(false);
+                 EmployeePanel.show(false);
+                 ServicesPanel.show(false);
+                 RoomPanel.show(true);    
+            }
       }
    }      
 }

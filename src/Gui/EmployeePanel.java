@@ -129,11 +129,11 @@ class EmployeePanel extends JPanel{
                                 this.add(permissionSelection);
      //_____________________________ now set password label and field____________________________
                                 password = new JLabel("Set Password");
-                                password.setBounds(270, 100, 150, 20);
+                                password.setBounds(10, 140, 150, 20);
                                 this.add(password);
                                 
                                 SetPassword = new JPasswordField();
-                                SetPassword.setBounds(370, 100, 150, 20);
+                                SetPassword.setBounds(100, 140, 150, 20);
                                 this.add(SetPassword);
                                 
                                 
