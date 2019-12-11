@@ -5,7 +5,8 @@
  */
 package Gui;
 
-import Database.CustomerData;
+import Database.*;
+import Database.Service_Data;
 import control.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -31,10 +32,13 @@ public class Gust_management extends JPanel {
      JTextField checkinDate ;
      JTextField checkoutDate ;
      JCheckBox NearCheckout;
+     JList Assign_OtherService;
+     JList Otherservice;
+     JButton SelectService ;
      JButton Bill ;
     String [] ColumnName={"Customer ID","Customer Name ","Room Number","checkin Date","checkout Date","Services"};
             CustomerData CoustomerData= new CustomerData();
-         Color c =new Color(0,255,127); 
+         Color c =new Color(0,255,127);   String [] array ={"ahmed","khaled","mohamed","essam","amr"} ;
      JTable GustTable ;
     public Gust_management() {
         this.setLayout(null);
@@ -79,6 +83,36 @@ public class Gust_management extends JPanel {
                                  JPanel billpanel = new JPanel();
                                  billpanel.setBounds(10, 420, 1000, 200);
    //_______________________________________________________________________________
+ 
+                                             Otherservice = new JList(array);
+                            Otherservice.setVisibleRowCount(5);
+                            Otherservice.setFixedCellHeight(10);
+                            Otherservice.setFixedCellWidth(100);
+                            Otherservice.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                            JScrollPane S1 =new JScrollPane(Otherservice);
+                            S1.setBounds(10, 340, 200, 50);
+                            this.add (S1);
+                            
+                            SelectService = new JButton("Select Other Service -->");
+                            SelectService.addActionListener( new ActionListener(){
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               Assign_OtherService.setListData( Otherservice.getSelectedValues());
+                    }    
+
+              }
+        );
+                          SelectService.setBounds(220, 340, 560, 50);
+                          this.add(SelectService);
+                          Assign_OtherService = new JList();
+                          Assign_OtherService.setVisibleRowCount(5);
+                          Assign_OtherService.setFixedCellHeight(10);
+                          Assign_OtherService.setFixedCellWidth(100);
+                          Assign_OtherService.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                          
+                          JScrollPane S2 =new JScrollPane(Assign_OtherService);
+                           S2.setBounds(800, 340, 200, 50);
+                            this.add (S2);
                               
         this.setVisible(true);
     }

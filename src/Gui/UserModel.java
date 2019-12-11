@@ -47,7 +47,7 @@ public class UserModel extends Employee{
         userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         userFrame.setSize(1500, 900);
         userFrame.setLocation(0,0);
-        userFrame.setTitle("Login");
+        userFrame.setTitle("User");
         userFrame.getContentPane().setBackground(Color.GRAY);
         userFrame.setLayout(null);
         
