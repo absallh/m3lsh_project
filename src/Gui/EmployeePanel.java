@@ -82,8 +82,8 @@ class EmployeePanel extends JPanel{
                this.add(id);
     
    //__________________________________________________________________________
-                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
-                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("follower.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
   //____________________________________________________________________________
                                 department = new JLabel("department") ;
                                     department.setBounds(10, 50, 150, 20);

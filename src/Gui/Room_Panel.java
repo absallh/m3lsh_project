@@ -85,8 +85,8 @@ public class Room_Panel extends JPanel {
     //___________________________________________________________________
    //__________________________________________________________________________
                           // icons ADD &Delete
-                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
-                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("follower.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
 
                  Add = new JButton (ADDIcon); // add add button && Delete
                          Add.setBounds(10, 330, 100, 70);

@@ -13,7 +13,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -34,10 +33,10 @@ public class UserModel extends Employee{
             JButton Room ;
             
             //__________ this is 3 icons to user it with three button _______ customer , employee and services
-            ImageIcon CutomerIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Office-Customer-Male-Light-icon.png");
-            ImageIcon EmployeeIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\employee.png");
-            ImageIcon ServicesIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Network_Service_Icon_128.png");
-            ImageIcon RoomIcon = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\icons8-room-64.png");
+            ImageIcon CutomerIcon = new ImageIcon(getClass().getResource("Office-Customer-Male-Light-icon.png"));
+            ImageIcon EmployeeIcon = new ImageIcon(getClass().getResource("employee.png"));
+            ImageIcon ServicesIcon = new ImageIcon(getClass().getResource("Network_Service_Icon_128.png"));
+            ImageIcon RoomIcon = new ImageIcon(getClass().getResource("icons8-room-64.png"));
             
     public UserModel() {
         userFrame = new JFrame();

@@ -1,4 +1,4 @@
-import Gui.*;
+import Gui.Login;
 public class m3lsh_Project {
 
     public static void main(String []args){

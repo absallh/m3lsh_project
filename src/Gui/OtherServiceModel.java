@@ -7,7 +7,6 @@ package Gui;
 
 import Database.Service_Data;
 import java.awt.Color;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -92,9 +91,9 @@ JFrame OtherServiceFrame ;
                          OtherServiceFrame.add(describe);
    //__________________________________________________________________________
                          
-                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Add-icon.png");
-                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\Actions-window-close-icon.png");
-                  ImageIcon  ReportIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\33.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("Add-icon.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("Actions-window-close-icon.png"));
+                  ImageIcon  ReportIcon= new ImageIcon(getClass().getResource("33.png"));
   //____________________________________________________________________________
                              
                            GenerateReport = new JButton(ReportIcon);
@@ -108,7 +107,7 @@ JFrame OtherServiceFrame ;
                          Delete.setBounds(260, 410, 250, 50);
                          OtherServiceFrame.add(Delete);
                          
-                           ImageIcon back = new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\hotel.jpg");
+                           ImageIcon back = new ImageIcon(getClass().getResource("hotel.jpg"));
                            paint = new JLabel(back);
                            paint.setBounds(0, 0, 1500, 900);
                            OtherServiceFrame.add(paint);

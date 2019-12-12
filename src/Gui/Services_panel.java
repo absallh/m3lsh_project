@@ -75,8 +75,8 @@ class Services_panel extends JPanel {
                          this.add(description);
                          this.add(describe);
    //__________________________________________________________________________
-                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\plus.png");
-                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("plus.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
   //____________________________________________________________________________
 
                          Add = new JButton (ADDIcon); // add add button && Delete

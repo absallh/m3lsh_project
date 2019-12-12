@@ -105,9 +105,9 @@ class CustomerPanel extends JPanel {
                          this.add(lastName_txt);
    //__________________________________________________________________________
                           // icons ADD &Delete
-                ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
-                ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
-                ImageIcon  SelectIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\tap.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource( "follower.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
+                ImageIcon  SelectIcon= new ImageIcon(getClass().getResource("tap.png"));
 
   //____________________________________________________________________________
                                 commingDate = new JLabel("Check In Date") ;

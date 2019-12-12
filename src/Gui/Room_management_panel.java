@@ -6,9 +6,7 @@
 package Gui;
 
 
-import Database.EmployeeData;
 import Database.Room_data;
-import control.room;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
