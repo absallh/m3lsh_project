@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Database.Room_data;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class Room_Panel extends JPanel {
             JComboBox Type ;
             // create array for type of room
             String [] RoomTypes ={"Single","Double","Triple","Quad","Queen","King","Twin","Mini Suites","Master Suite","Others"};
+            public Room_data RoomData = new Room_data();
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
@@ -39,19 +41,19 @@ public class Room_Panel extends JPanel {
                                 // Panel Colore and positions in frame
         this.setLayout(null);
         this.setBackground(c);
-//          RoomTable= new JTable(RoomData);
-//        JScrollPane sc = new JScrollPane(RoomTable, 
-//            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
-//            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-//        sc.setBounds(10, 400,1000, 200);
-//        this.add(sc);
-//        //_______Table charactaristics_________________________________
-//        RoomTable.setBackground(Color.WHITE);
-//        
-//        sc.setBounds(10, 400,1000, 200);
-//        
-//        this.setBounds(250, 10, 1020, 650);
-//             this.add(sc);
+          RoomTable= new JTable(RoomData);
+        JScrollPane sc = new JScrollPane(RoomTable, 
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sc.setBounds(10, 400,1000, 200);
+        this.add(sc);
+       //_______Table charactaristics_________________________________
+        RoomTable.setBackground(Color.WHITE);
+        
+        sc.setBounds(10, 400,1000, 200);
+        
+        this.setBounds(250, 10, 1020, 650);
+             this.add(sc);
            RoomNumber = new JLabel("Room Number") ;
         
         Rnum = new JComboBox() ;

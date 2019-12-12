@@ -6,108 +6,60 @@
 package Database;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author absal
  */
 public class CustomerData extends Data {
+    public final static String DEFUALT_QUERY = "select customer.customer_id, Fname, Lname, nationality, age, coming_date, check_out_date, Room_number " +
+                            "from customer left join customer_room " +
+                            "on customer.customer_id = customer_room.customer_id";
+    public String DEFAULT_QUERY;
     
     public CustomerData (){
+        setQuery(DEFUALT_QUERY);
+    }
+    
+    public void write (String frist_name, String lastName, String nationality, 
+            int age, String commingDate, String checkOutDate){
+        String insertTransaction = "INSERT INTO customer (Fname, Lname, nationality, age, coming_date, check_out_date)"
+                +"values ('"+frist_name+"','"+lastName+"','"
+                +nationality+"',"+age+",'"+commingDate+"','"+checkOutDate+"')";
         try {
-            // specify query and execute it
-            resultSet = statement.executeQuery( "SELECT * FROM customer" );
-            
-            // obtain meta data for ResultSet
-            metaData = resultSet.getMetaData();
-            
-            // determine number of rows in ResultSet
-            resultSet.last();                   // move to last row
-            numberOfRows = resultSet.getRow();  // get row number      
-
-            // notify JTable that model has changed
-            fireTableStructureChanged();
+            statement.executeUpdate(insertTransaction);//insert into the DB
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    @Override
-    public int getColumnCount() {
-        // ensure database connection is available
-      if (connectedToDatabase )
-      {
-            // determine number of columns
-            try 
-            {
-               return metaData.getColumnCount(); 
-            } // end try
-            catch ( SQLException sqlException ) 
-            {
-               sqlException.printStackTrace();
-            } // end catch
-      }
-      return 0; // if problems occur above, return 0 for number of columns
-    }
     
-    // get class that represents column type
-    
-    @Override
-   public Class getColumnClass( int column ) throws IllegalStateException
-   {
-      // ensure database connection is available
-      if ( !connectedToDatabase ) 
-         throw new IllegalStateException( "Not Connected to Database" );
-      
-      
-      return Object.class; // if problems occur above, assume type Object
-   } // end method getColumnClass
-    
-   @Override
-   public String getColumnName( int column )
-   {    
-      // ensure database connection is available
-      if ( connectedToDatabase ) {
-
-            // determine column name
-            try 
-            {
-               return metaData.getColumnName( column + 1 );  
-            } // end try
-            catch ( SQLException sqlException ) 
-            {
-               sqlException.printStackTrace();
-            } // end catch
+    public void delete (int ID){
+        try {
+            String deleteStatment = "delete from customer_room where customer_id = "+ID+"\n" +
+                                    "delete from customer_service where customer_id = "+ID+"\n" +
+                                    "delete from customer where customer_id = "+ID;
+            statement.executeUpdate(deleteStatment);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-      return ""; // if problems, return empty string for column name
-   } // end method getColumnName
-
-   
-    @Override
-    public int getRowCount() {
-        if (connectedToDatabase)
-            return numberOfRows;
-        
-        return 0;
     }
-
-    @Override
-    public Object getValueAt(int row, int column) {
-        if (connectedToDatabase){
-            // obtain a value at specified ResultSet row and column
-            try 
-            {
-               resultSet.absolute( row + 1 );
-               return resultSet.getObject( column + 1 );
-            } // end try
-            catch ( SQLException sqlException ) 
-            {
-               sqlException.printStackTrace();
-            } // end catch
+    
+    public void update (int ID, String frist_name, String lastName, String nationality, 
+            int age, String commingDate, String checkOutDate){
+        String qury = "update customer\n" +
+            "set Fname = '"+frist_name+"', Lname = '"+lastName+"', nationality = '"+
+                nationality+"', age = "+age+", coming_date = '"+commingDate+
+                "', check_out_date = '"+checkOutDate+"'\n" +
+            "where customer_id = "+ID;
+        try {
+            statement.executeUpdate(qury);
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
         }
-        return "";// if problems, return empty string object
     }
-    
-    
 
 }

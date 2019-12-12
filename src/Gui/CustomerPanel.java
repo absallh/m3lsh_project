@@ -12,6 +12,8 @@ import control.service;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javafx.scene.control.*;
 import javax.swing.*;
@@ -25,16 +27,16 @@ class CustomerPanel extends JPanel {
           TableColumn  Customer_Name = new TableColumn("name") ;
         // Form
             JLabel CustomerName ;
-            JLabel CustomerId ;
-            JLabel CustomerPhone ;
+            JLabel age ;
+            JLabel lastName ;
             JLabel CustomerNationality ;
             JLabel commingDate ;
             JLabel ccheckOut ;
             JLabel RoomChoice;
             JLabel ServicesChoice ;
             JTextField name ;
-            JTextField id ;
-            JTextField phone ;
+            JTextField age_txt ;
+            JTextField lastName_txt ;
             JComboBox nationality ;
             JTextField checkin ;
             JTextField checkout ;
@@ -57,6 +59,7 @@ class CustomerPanel extends JPanel {
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
+            JButton update;
             JTable CustomerTable ;
                 Color c = new Color(173,216,230);
 
@@ -80,26 +83,26 @@ class CustomerPanel extends JPanel {
              this.add(sc);
  //______________________________________________________________________
    
-         CustomerName = new JLabel("Cutomer Name") ;
+         CustomerName = new JLabel("Cutomer first Name") ;
         name = new JTextField(20) ;
         CustomerName.setBounds(10, 10, 150, 20);
         this.add(CustomerName);
         name.setBounds(100, 10, 150, 20);
         this.add(name);
      //_____________________________________________________
-              CustomerId = new JLabel("Cutomer ID") ;
-              CustomerId.setBounds(270, 10, 150, 20);
-              id = new JTextField(10) ;
-              id.setBounds(370, 10, 150, 20);
-               this.add(CustomerId);
-               this.add(id);
+              age = new JLabel("Cutomer age") ;
+              age.setBounds(270, 10, 150, 20);
+              age_txt = new JTextField(10) ;
+              age_txt.setBounds(370, 10, 150, 20);
+               this.add(age);
+               this.add(age_txt);
     //___________________________________________________________________
-                    CustomerPhone = new JLabel("Cutomer Phone") ;
-                    CustomerPhone.setBounds(550, 10, 150, 20);
-                    phone = new JTextField(20) ;
-                    phone.setBounds(670, 10, 150, 20);
-                         this.add(CustomerPhone);
-                         this.add(phone);
+                    lastName = new JLabel("Cutomer last name") ;
+                    lastName.setBounds(550, 10, 150, 20);
+                    lastName_txt = new JTextField(20) ;
+                    lastName_txt.setBounds(670, 10, 150, 20);
+                         this.add(lastName);
+                         this.add(lastName_txt);
    //__________________________________________________________________________
                           // icons ADD &Delete
                 ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
@@ -123,12 +126,8 @@ class CustomerPanel extends JPanel {
      //__________________________________________________________
                           CustomerNationality = new JLabel("Cutomer Nationality") ;
                           CustomerNationality.setBounds(550, 50, 150, 20);
-                          nationality = new JComboBox();
-                          for (int i =0 ;i<Nation.length;i++){
-                              
-                          nationality.addItem(Nation[i]);     
+                          nationality = new JComboBox(Nation);
                           
-                          }
                           nationality.setBounds(670, 50, 150, 20);
                                  this.add(CustomerNationality);
                                  this.add(nationality);
@@ -185,17 +184,71 @@ class CustomerPanel extends JPanel {
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
+                        update = new JButton ("SUBMIT UPDATE"); 
+                         update.setBounds(230, 330, 100, 70);
+                         this.add(update);
+                         buttonAction buttonHandling = new buttonAction();
+                         Add.addActionListener(buttonHandling);
+                         Delete.addActionListener(buttonHandling);
+                         update.addActionListener(buttonHandling);
+                    
+                         CustomerTable.addMouseListener(new tableMouseListener());
                          
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 this.setVisible(true);
-    }                      
+        this.setVisible(true);
+    }                         
                      
+    private class tableMouseListener extends MouseAdapter{
+      @Override
+      public void mouseClicked(MouseEvent e) {
+            int row = CustomerTable.rowAtPoint(e.getPoint());//get mouse-selected row
+            //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
+            name.setText(String.format("%s", CoustomerData.getValueAt(row, 1)));
+            lastName.setText(String.format("%s", CoustomerData.getValueAt(row, 2)));
+            nationality.setSelectedItem(CoustomerData.getValueAt(row, 3));
+            age_txt.setText(String.format("%s", CoustomerData.getValueAt(row, 4)));
+            checkin.setText(String.format("%s", CoustomerData.getValueAt(row, 5)));
+            checkout.setText(String.format("%s", CoustomerData.getValueAt(row, 6)));
+        }
+    }
+    
+    private class buttonAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (ae.getSource() == Add){
+                CoustomerData.write(name.getText(), lastName.getText(), 
+                        (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
+                        checkin.getText(), checkout.getText());
+                CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
+                JOptionPane.showMessageDialog(null, "Added sec");
+            }
+            else if (ae.getSource() == Delete){
+                if (CustomerTable.getSelectionModel().isSelectionEmpty())
+                    JOptionPane.showMessageDialog(null, "select any customer to edite", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
+                else 
+                {
+                    int row = CustomerTable.getSelectedRow();//get selected row indext
+                    CoustomerData.delete((int) CoustomerData.getValueAt(row, 0));
+                    JOptionPane.showMessageDialog(null, "Deleted suc");
+                    CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
+                }
+            }
+            else if (ae.getSource() == update){
+                if (CustomerTable.getSelectionModel().isSelectionEmpty())
+                    JOptionPane.showMessageDialog(null, "select any customer to update", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
+                else 
+                {
+                    int row = CustomerTable.getSelectedRow();//get selected row indext
+                    CoustomerData.update((int) CoustomerData.getValueAt(row, 0), name.getText(), lastName.getText(), 
+                        (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
+                        checkin.getText(), checkout.getText());
+                CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
+                JOptionPane.showMessageDialog(null, "Added sec");
+                }
+            }
+        }
+        
+    }
+
     
 }

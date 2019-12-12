@@ -8,6 +8,8 @@ package Gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -99,6 +101,22 @@ public class UserModel extends Employee{
         userFrame.add(EmployeePanel);
         userFrame.add(ServicesPanel);        
         userFrame.add(RoomPanel);    
+        
+        // ensure database connection is closed when user quits application
+      userFrame.addWindowListener(      
+         new WindowAdapter() 
+         {
+            // disconnect from database and exit when window has closed
+            @Override
+            public void windowClosed( WindowEvent event )
+            {
+               CustomerPanel.CoustomerData.disconnectFromDatabase();
+               EmployeePanel.DataEmployee.disconnectFromDatabase();
+               ServicesPanel.ServicesData.disconnectFromDatabase();
+               System.exit( 0 );
+            } // end method windowClosed
+         } // end WindowAdapter inner class
+      ); // end call to addWindowListener
          
         userFrame.setVisible(true);
     }

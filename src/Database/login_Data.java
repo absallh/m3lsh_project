@@ -5,7 +5,6 @@
  */
 package Database;
 
-import static Database.Data.db_Url;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;

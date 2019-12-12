@@ -41,8 +41,6 @@ class EmployeePanel extends JPanel{
              String [] Permissions={"user_model","room_mangement","other_services"};
              //dimentional array for data coming from database 
              EmployeeData DataEmployee = new EmployeeData();
-             //String of table column name can easily change
-            String ColumnName[]={ "id","name","email","nationality","permission"};
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
@@ -82,13 +80,7 @@ class EmployeePanel extends JPanel{
               id.setBounds(370, 10, 150, 20);
                this.add(EmployeeId);
                this.add(id);
-    //___________________________________________________________________
-                    EmployeePhone = new JLabel("Employee Phone") ;
-                    EmployeePhone.setBounds(550, 10, 150, 20);
-                    phone = new JTextField(20) ;
-                    phone.setBounds(670, 10, 150, 20);
-                         this.add(EmployeePhone);
-                         this.add(phone);
+    
    //__________________________________________________________________________
                 ImageIcon  ADDIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\follower.png");
                 ImageIcon  DeleteIcon= new ImageIcon("C:\\Users\\HERO\\Desktop\\m3lsh_project\\src\\delete.png");
