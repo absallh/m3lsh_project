@@ -40,8 +40,6 @@ class CustomerPanel extends JPanel {
             JTextField checkin ;
             JTextField checkout ;
             // Deficult m3lesh tell me what i do because i dont know
-            JList ChoiceService ;
-            JList SelectedServices;
             JButton Click;
             JComboBox selectroom ;
              JScrollPane S1 ;
@@ -52,9 +50,7 @@ class CustomerPanel extends JPanel {
              ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
              ArrayList<room> SelctionRoom  = new ArrayList<>();
              Service_Data  service = new Service_Data();
-             //Should put Array of Object about service >>
-              String [] array ={"ahmed","mohamed","hossam ","osama","amr","mostafa","ahmed","mohamed","hossam ","osama","amr","mostafa"};
-//             this is array list from room type
+             //             this is array list from room type
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
@@ -142,40 +138,6 @@ class CustomerPanel extends JPanel {
                                }
                                selectroom.setBounds(100, 100, 150, 20);
                                this.add(selectroom);
-     //__________________________________________________________________________________________________
-
-                            ChoiceService = new JList(array);
-                            ChoiceService.setVisibleRowCount(5);
-                            ChoiceService.setFixedCellHeight(10);
-                            ChoiceService.setFixedCellWidth(100);
-                            ChoiceService.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-                            S1 =new JScrollPane(ChoiceService);
-                            S1.setBounds(20, 200, 200, 100);
-                            this.add (S1);
-                            
-                            Click = new JButton(SelectIcon);
-                            Click.addActionListener( new ActionListener(){
-             @Override
-             public void actionPerformed(ActionEvent e) {
-               SelectedServices.setListData( ChoiceService.getSelectedValues());
-                    }    
-
-              }
-        );
-                          Click.setBounds(220, 200, 200, 100);
-                          this.add(Click);
-                          SelectedServices = new JList();
-                          SelectedServices.setVisibleRowCount(5);
-                          SelectedServices.setFixedCellHeight(10);
-                          SelectedServices.setFixedCellWidth(100);
-                          SelectedServices.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-                          
-                          JScrollPane S2 =new JScrollPane(SelectedServices);
-                           S2.setBounds(420, 200, 200, 100);
-                            this.add (S2);
-                                 
-                                 
-
       //____________________________________________________________________________________________                       
                          Add = new JButton (ADDIcon); // add add button && Delete
                          Add.setBounds(10, 330, 100, 70);
