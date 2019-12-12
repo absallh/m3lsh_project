@@ -7,6 +7,9 @@ package Gui;
 
 import Database.Service_Data;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -91,12 +94,22 @@ JFrame OtherServiceFrame ;
                          OtherServiceFrame.add(describe);
    //__________________________________________________________________________
                          
-                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("Add-icon.png"));
-                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("Actions-window-close-icon.png"));
-                  ImageIcon  ReportIcon= new ImageIcon(getClass().getResource("33.png"));
+                ImageIcon  ADDIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\Add-icon.png");
+                ImageIcon  DeleteIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\Actions-window-close-icon.png");
+                  ImageIcon  ReportIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\33.png");
   //____________________________________________________________________________
                              
                            GenerateReport = new JButton(ReportIcon);
+                           GenerateReport.addActionListener(new ActionListener(){
+
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               if (e.getSource()== GenerateReport){
+                   ReportFrame Report = new ReportFrame();
+                   Report.work();
+               }
+           }
+       });
                            GenerateReport.setBounds(1200, 10, 150, 100);
                            OtherServiceFrame.add(GenerateReport);
 
@@ -107,7 +120,7 @@ JFrame OtherServiceFrame ;
                          Delete.setBounds(260, 410, 250, 50);
                          OtherServiceFrame.add(Delete);
                          
-                           ImageIcon back = new ImageIcon(getClass().getResource("hotel.jpg"));
+                           ImageIcon back = new ImageIcon("F:\\m3lsh_project\\src\\Gui\\hotel.jpg");
                            paint = new JLabel(back);
                            paint.setBounds(0, 0, 1500, 900);
                            OtherServiceFrame.add(paint);

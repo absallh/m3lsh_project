@@ -83,7 +83,7 @@ class CustomerPanel extends JPanel {
              this.add(sc);
  //______________________________________________________________________
    
-         CustomerName = new JLabel("Cutomer first Name") ;
+         CustomerName = new JLabel("first Name") ;
         name = new JTextField(20) ;
         CustomerName.setBounds(10, 10, 150, 20);
         this.add(CustomerName);
@@ -97,7 +97,7 @@ class CustomerPanel extends JPanel {
                this.add(age);
                this.add(age_txt);
     //___________________________________________________________________
-                    lastName = new JLabel("Cutomer last name") ;
+                    lastName = new JLabel(" last name") ;
                     lastName.setBounds(550, 10, 150, 20);
                     lastName_txt = new JTextField(20) ;
                     lastName_txt.setBounds(670, 10, 150, 20);

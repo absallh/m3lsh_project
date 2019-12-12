@@ -82,7 +82,7 @@ public class Gust_management extends JPanel {
 //______________________________________________________________________
 
    submit = new JButton("SUBMIT");
-   submit.setBounds(870, 330, 80, 50);
+   submit.setBounds(925, 250, 80, 50);
    button_action actionButton = new button_action();
    submit.addActionListener(actionButton);
    this.add(submit);
