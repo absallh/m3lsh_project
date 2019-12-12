@@ -9,7 +9,7 @@ package Database;
  * @author absal
  */
 public class Gust_mangement_data extends Data {
-    public static final String DEFAULT_QUERY = "select customer.customer_id, fname, lname, coming_date, check_out_date, customer_room.Room_number" +
+    public static final String DEFAULT_QUERY = "select customer.customer_id, first_name, last_name, coming_date, check_out_date, customer_room.Room_number" +
                     " from customer left join customer_room" +
                     " on customer.customer_id = customer_room.customer_id";
     public Gust_mangement_data (){

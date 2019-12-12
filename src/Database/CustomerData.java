@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author absal
  */
 public class CustomerData extends Data {
-    public final static String DEFUALT_QUERY = "select customer.customer_id, Fname, Lname, nationality, age, coming_date, check_out_date, Room_number " +
+    public final static String DEFUALT_QUERY = "select customer.customer_id, First_name, Last_name, nationality, age, coming_date, check_out_date, Room_number " +
                             "from customer left join customer_room " +
                             "on customer.customer_id = customer_room.customer_id";
     public String DEFAULT_QUERY;
@@ -23,9 +23,10 @@ public class CustomerData extends Data {
         setQuery(DEFUALT_QUERY);
     }
     
-    public void write (String frist_name, String lastName, String nationality, 
+    public void add (String frist_name, String lastName, String nationality, 
             int age, String commingDate, String checkOutDate){
-        String insertTransaction = "INSERT INTO customer (Fname, Lname, nationality, age, coming_date, check_out_date)"
+        String insertTransaction = "INSERT INTO customer "+
+                "(First_name, Last_name, nationality, age, coming_date, check_out_date) "
                 +"values ('"+frist_name+"','"+lastName+"','"
                 +nationality+"',"+age+",'"+commingDate+"','"+checkOutDate+"')";
         try {
@@ -50,7 +51,7 @@ public class CustomerData extends Data {
     public void update (int ID, String frist_name, String lastName, String nationality, 
             int age, String commingDate, String checkOutDate){
         String qury = "update customer\n" +
-            "set Fname = '"+frist_name+"', Lname = '"+lastName+"', nationality = '"+
+            "set First_name = '"+frist_name+"', Last_name = '"+lastName+"', nationality = '"+
                 nationality+"', age = "+age+", coming_date = '"+commingDate+
                 "', check_out_date = '"+checkOutDate+"'\n" +
             "where customer_id = "+ID;

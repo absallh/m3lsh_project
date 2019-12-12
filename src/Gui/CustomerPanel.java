@@ -8,7 +8,6 @@ package Gui;
 import Database.CustomerData;
 import Database.Service_Data;
 import control.room;
-import control.service;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -193,17 +192,18 @@ class CustomerPanel extends JPanel {
                          update.addActionListener(buttonHandling);
                     
                          CustomerTable.addMouseListener(new tableMouseListener());
+                         CustomerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                          
         this.setVisible(true);
-    }                         
-                     
+    }
+    int row;
     private class tableMouseListener extends MouseAdapter{
       @Override
       public void mouseClicked(MouseEvent e) {
-            int row = CustomerTable.rowAtPoint(e.getPoint());//get mouse-selected row
+            row = CustomerTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
             name.setText(String.format("%s", CoustomerData.getValueAt(row, 1)));
-            lastName.setText(String.format("%s", CoustomerData.getValueAt(row, 2)));
+            lastName_txt.setText(String.format("%s", CoustomerData.getValueAt(row, 2)));
             nationality.setSelectedItem(CoustomerData.getValueAt(row, 3));
             age_txt.setText(String.format("%s", CoustomerData.getValueAt(row, 4)));
             checkin.setText(String.format("%s", CoustomerData.getValueAt(row, 5)));
@@ -216,35 +216,28 @@ class CustomerPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == Add){
-                CoustomerData.write(name.getText(), lastName.getText(), 
+                CoustomerData.add(name.getText(), lastName.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
                 CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
                 JOptionPane.showMessageDialog(null, "Added sec");
             }
-            else if (ae.getSource() == Delete){
-                if (CustomerTable.getSelectionModel().isSelectionEmpty())
-                    JOptionPane.showMessageDialog(null, "select any customer to edite", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
-                else 
-                {
+            else if (CustomerTable.getSelectionModel().isSelectionEmpty()){
+                JOptionPane.showMessageDialog(null, "select any customer to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
+            }else if (ae.getSource() == Delete){
                     int row = CustomerTable.getSelectedRow();//get selected row indext
                     CoustomerData.delete((int) CoustomerData.getValueAt(row, 0));
                     JOptionPane.showMessageDialog(null, "Deleted suc");
                     CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
-                }
             }
             else if (ae.getSource() == update){
-                if (CustomerTable.getSelectionModel().isSelectionEmpty())
-                    JOptionPane.showMessageDialog(null, "select any customer to update", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
-                else 
-                {
+                
                     int row = CustomerTable.getSelectedRow();//get selected row indext
                     CoustomerData.update((int) CoustomerData.getValueAt(row, 0), name.getText(), lastName.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
                 CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
                 JOptionPane.showMessageDialog(null, "Added sec");
-                }
             }
         }
         

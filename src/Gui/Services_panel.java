@@ -8,6 +8,10 @@ package Gui;
 
 import Database.Service_Data;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javafx.scene.control.*;
 import javax.swing.*;
 
@@ -24,15 +28,15 @@ class Services_panel extends JPanel {
             JLabel description ;
             JTextField name ;
             JTextField price ;
-            JTextField describe ;
+            JTextArea describe ;
             
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
+            JButton update;
             JTable SeviceTable ;
             // two Array one from database another String for column name
             Service_Data ServicesData = new Service_Data();
-            String[]ColumnName ={"Service Name","Service price","Service Describtion"};
                 Color c = new Color(173,216,230);
 
     public Services_panel() {
@@ -45,6 +49,7 @@ class Services_panel extends JPanel {
         
         //_______Table charactaristics_________________________________
         SeviceTable.setBackground(Color.WHITE);
+        SeviceTable.addMouseListener(new tableMouseListener());
   //__________________________________________________________
 //   panel describtion
    
@@ -70,8 +75,8 @@ class Services_panel extends JPanel {
     //___________________________________________________________________
                     description = new JLabel("description") ;
                     description.setBounds(10, 50, 150, 20);
-                    describe = new JTextField() ;
-                    describe.setBounds(100, 50, 150, 20);
+                    describe = new JTextArea();
+                    describe.setBounds(100, 50, 500, 100);
                          this.add(description);
                          this.add(describe);
    //__________________________________________________________________________
@@ -85,12 +90,59 @@ class Services_panel extends JPanel {
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-     
-                                 
+                         update = new JButton();
+                         update.setBounds(230, 330, 100, 70);
+                         this.add(update);    
+                         buttonAction action = new buttonAction();
+                         Add.addActionListener(action);
+                         update.addActionListener(action);
+                         Delete.addActionListener(action);
+                         
                            this.setVisible(true);
                                  
                                  
-    }              
-                                 
+    }
+    
+    int row;//the selected row index
+    private class tableMouseListener extends MouseAdapter{
+      @Override
+      public void mouseClicked(MouseEvent e) {
+            row = SeviceTable.rowAtPoint(e.getPoint());//get mouse-selected row
+            //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
+            name.setText(String.format("%s", ServicesData.getValueAt(row, 0)));
+            describe.setText(String.format("%s", ServicesData.getValueAt(row, 1)));
+            price.setText(String.format("%s",ServicesData.getValueAt(row, 2)));
+        }
+    }
+    
+    private class buttonAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (ae.getSource() == Add) {
+                if (ServicesData.add(name.getText(), Double.parseDouble(price.getText()), describe.getText())){
+                    JOptionPane.showMessageDialog(null, "Added successfully");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "can't add exist name of service", "Input Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else if (SeviceTable.getSelectionModel().isSelectionEmpty()){
+                JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                if (ae.getSource() == Delete){
+                    ServicesData.delete(String.format("%s",ServicesData.getValueAt(row, 0)));
+                    JOptionPane.showMessageDialog(null, "Deleted successfully");
+                }
+                else if (ae.getSource() == update){
+                    ServicesData.update(String.format("%s",ServicesData.getValueAt(row, 0)), 
+                            name.getText(), Double.parseDouble(price.getText()), describe.getText());
+                    JOptionPane.showMessageDialog(null, "Updated successfully");
+                }
+            }
+            ServicesData.setQuery(ServicesData.DEFUALT_QUERY);
+        }
+    }
+        
 }
     
+

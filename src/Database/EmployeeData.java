@@ -3,22 +3,56 @@ package Database;
 import java.sql.SQLException;
 
 public class EmployeeData extends Data{
+    public static final String DEFUALT_QUERY = "select id, employee_name, "+
+            "nationality, permition, UserName from Employee";
+    
     public EmployeeData (){
+        setQuery(DEFUALT_QUERY);
+    }
+    
+    public boolean add(int id, String name, String nationality, 
+            String premission, String userName, String Password){
+        
+        String insertTransaction = "INSERT INTO Employee "
+                +"values ("+id+",'"+name+"','"+nationality+"','"
+                +premission+"','"+userName+"','"+Password+"')";
         try {
-            // specify query and execute it
-            resultSet = statement.executeQuery( "SELECT * FROM employee" );
-            
-            // obtain meta data for ResultSet
-            metaData = resultSet.getMetaData();
-            
-            // determine number of rows in ResultSet
-            resultSet.last();                   // move to last row
-            numberOfRows = resultSet.getRow();  // get row number      
-
-            // notify JTable that model has changed
-            fireTableStructureChanged();
+            resultSet = statement.executeQuery("select id from Employee where id = "+
+                    id+" or UserName = '"+userName+"'");
+            if (resultSet.next()){//check if the id exist or not
+                return false;
+            }else{
+                statement.executeUpdate(insertTransaction);//insert into the DB
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public void delete (int ID){
+        try {
+            String deleteStatment = "delete from Employee where id = "+ID;
+            statement.executeUpdate(deleteStatment);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+    
+    public void update (int id, String name, String nationality, 
+            String premission, String userName, String Password){
+        String qury = "update Employee\n" +"set id = "+id+
+                ", employee_name = '"+name+"', nationality = '"+nationality+
+                "', permition = '"+premission+"', UserName = '"+userName+
+                "', user_password = '"+Password+"' \n" +
+                "where id = "+id;
+        try {
+            statement.executeUpdate(qury);
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }
