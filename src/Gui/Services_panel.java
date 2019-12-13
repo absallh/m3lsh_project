@@ -120,11 +120,18 @@ class Services_panel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == Add) {
-                if (ServicesData.add(name.getText(), Double.parseDouble(price.getText()), describe.getText())){
-                    JOptionPane.showMessageDialog(null, "Added successfully");
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "can't add exist name of service", "Input Error", JOptionPane.INFORMATION_MESSAGE);
+                if (!SeviceTable.getSelectionModel().isSelectionEmpty()){
+                    name.setText("");
+                    price.setText("");
+                    describe.setText("");
+                    SeviceTable.getSelectionModel().clearSelection();//clear the selection from the table
+                }else{
+                    if (ServicesData.add(name.getText(), Double.parseDouble(price.getText()), describe.getText())){
+                        JOptionPane.showMessageDialog(null, "Added successfully");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "can't add exist name of service", "Input Error", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }else if (SeviceTable.getSelectionModel().isSelectionEmpty()){
                 JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);

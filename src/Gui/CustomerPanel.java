@@ -178,11 +178,21 @@ class CustomerPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == Add){
-                CoustomerData.add(name.getText(), lastName.getText(), 
+                if (!CustomerTable.getSelectionModel().isSelectionEmpty()){
+                    name.setText("");
+                    lastName_txt.setText("");
+                    nationality.setSelectedIndex(0);
+                    age_txt.setText("");
+                    checkin.setText("");
+                    checkout.setText("");
+                    CustomerTable.getSelectionModel().clearSelection();
+                }else{
+                    CoustomerData.add(name.getText(), lastName_txt.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
-                CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
-                JOptionPane.showMessageDialog(null, "Added sec");
+                    
+                    JOptionPane.showMessageDialog(null, "Added sec");
+                }
             }
             else if (CustomerTable.getSelectionModel().isSelectionEmpty()){
                 JOptionPane.showMessageDialog(null, "select any customer to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
@@ -190,7 +200,6 @@ class CustomerPanel extends JPanel {
                     int row = CustomerTable.getSelectedRow();//get selected row indext
                     CoustomerData.delete((int) CoustomerData.getValueAt(row, 0));
                     JOptionPane.showMessageDialog(null, "Deleted suc");
-                    CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
             }
             else if (ae.getSource() == update){
                 
@@ -198,9 +207,9 @@ class CustomerPanel extends JPanel {
                     CoustomerData.update((int) CoustomerData.getValueAt(row, 0), name.getText(), lastName.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
-                CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
                 JOptionPane.showMessageDialog(null, "Added sec");
             }
+            CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
         }
         
     }

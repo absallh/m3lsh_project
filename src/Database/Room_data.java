@@ -3,7 +3,7 @@ package Database;
 import java.sql.SQLException;
 
 public class Room_data extends Data{
-    public static final String DEFULT_QUERY = "select room_number, price, room_type from Room";
+    public static final String DEFULT_QUERY = "select room_number, price, room_type, boolean_busy from Room";
     
     public Room_data (){
         setQuery(DEFULT_QUERY);

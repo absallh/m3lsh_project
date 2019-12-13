@@ -26,7 +26,6 @@ class EmployeePanel extends JPanel{
             JLabel EmployeeId ;
             JLabel EmployeePhone ;
             JLabel EmployeeNationality ;
-            JLabel department ;
             JLabel Username ;
             JLabel permission ;
             JLabel password ;
@@ -35,7 +34,6 @@ class EmployeePanel extends JPanel{
             JTextField phone ;
             JComboBox nationality ;
             JComboBox permissionSelection;
-            JTextField departmentField ;
             JTextField SetUsername ;
             JPasswordField SetPassword;
             // String of nationality
@@ -90,21 +88,14 @@ class EmployeePanel extends JPanel{
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("follower.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
   //____________________________________________________________________________
-                                department = new JLabel("department") ;
-                                    department.setBounds(10, 50, 150, 20);
-                                departmentField = new JTextField(10) ;
-                                   departmentField.setBounds(100, 50, 150, 20);
-                                  this.add(department);
-                                   this.add(departmentField);
-   //_________________________________________________________
-                                       Username = new JLabel("Set Username ") ;
+                                        Username = new JLabel("Set Username ") ;
                                         Username.setBounds(270, 50, 150, 20);
                                        SetUsername = new JTextField(10) ;
                                         SetUsername.setBounds(370, 50, 150, 20);
                                  this.add(Username);
                                  this.add(SetUsername);
      //__________________________________________________________
-                          EmployeeNationality = new JLabel("Cutomer Nationality") ;
+                          EmployeeNationality = new JLabel("Employee Nationality") ;
                           EmployeeNationality.setBounds(550, 50, 150, 20);
                           nationality = new JComboBox(Nation);
                           
@@ -157,10 +148,12 @@ class EmployeePanel extends JPanel{
             row = EmployeeTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
             id.setText(String.format("%s", DataEmployee.getValueAt(row, 0)));
+            id.setEditable(false);
             name.setText(String.format("%s", DataEmployee.getValueAt(row, 1)));
             nationality.setSelectedItem(DataEmployee.getValueAt(row, 2));
             permissionSelection.setSelectedItem(DataEmployee.getValueAt(row, 3));
             SetUsername.setText(String.format("%s", DataEmployee.getValueAt(row, 4)));
+            SetUsername.setEditable(false);
         }
     }
     
@@ -169,14 +162,26 @@ class EmployeePanel extends JPanel{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == Add){
-                if(DataEmployee.add(Integer.parseInt(id.getText()), name.getText(), 
-                        (String)nationality.getSelectedItem(), (String)permissionSelection.getSelectedItem(),
-                        SetUsername.getText(), SetPassword.getText()))
-                {
-                    DataEmployee.setQuery(DataEmployee.DEFUALT_QUERY);
-                    JOptionPane.showMessageDialog(null, "Added successfully");
+                if(!EmployeeTable.getSelectionModel().isSelectionEmpty()){
+                    id.setText("");
+                    id.setEditable(true);
+                    name.setText("");
+                    nationality.setSelectedIndex(0);
+                    permissionSelection.setSelectedIndex(0);
+                    SetUsername.setText("");
+                    SetUsername.setEditable(true);
+                    SetPassword.setText("");
+                    EmployeeTable.getSelectionModel().clearSelection();
                 }else{
-                    JOptionPane.showMessageDialog(null, "can't add exist id or user name","input Error", JOptionPane.ERROR_MESSAGE);
+                    if(DataEmployee.add(Integer.parseInt(id.getText()), name.getText(), 
+                            (String)nationality.getSelectedItem(), (String)permissionSelection.getSelectedItem(),
+                            SetUsername.getText(), SetPassword.getText()))
+                    {
+                        DataEmployee.setQuery(DataEmployee.DEFUALT_QUERY);
+                        JOptionPane.showMessageDialog(null, "Added successfully");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "can't add exist id or user name","input Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 
             }

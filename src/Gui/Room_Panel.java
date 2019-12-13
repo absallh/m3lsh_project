@@ -124,12 +124,19 @@ public class Room_Panel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == Add){
-                if (RoomData.add(Rnum.getText(), Double.parseDouble(price.getText()),
-                        (String) Type.getSelectedItem())){
-                    JOptionPane.showMessageDialog(null, "Added successfully");
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Can't Add a room with exist number", "Input Error", JOptionPane.ERROR_MESSAGE);
+                if (!RoomTable.getSelectionModel().isSelectionEmpty()){
+                    Rnum.setText("");
+                    price.setText("");
+                    Type.setSelectedIndex(0);
+                    RoomTable.getSelectionModel().clearSelection();//clear the selection from the table
+                }else{
+                    if (RoomData.add(Rnum.getText(), Double.parseDouble(price.getText()),
+                            (String) Type.getSelectedItem())){
+                        JOptionPane.showMessageDialog(null, "Added successfully");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Can't Add a room with exist number", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
             else if (RoomTable.getSelectionModel().isSelectionEmpty()){

@@ -4,8 +4,7 @@ use HotelDataBase
 
 create table Employee( 
 	id int primary key ,
-	Fname varchar(20) not null ,
-	Lname varchar(20) ,
+	employee_name varchar(50) ,
 	nationality varchar(20),
 	permition varchar(40),
 	user_password varchar(10) not null,
@@ -14,7 +13,7 @@ create table Employee(
 
 create table customer(
 	customer_id int identity(1,1) primary key,
-	Fname varchar not null,
+	Fname varchar(20) not null,
 	Lname varchar (20),
 	nationality varchar(20),
 	age int,
@@ -78,4 +77,3 @@ create table customer_room(
 	Room_number varchar(10) not null,
 	foreign key (Room_number) references Room(Room_number)
 );
-Select *from customer
