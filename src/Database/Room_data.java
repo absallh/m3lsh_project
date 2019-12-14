@@ -1,6 +1,8 @@
 package Database;
 
+import static Database.Gust_mangement_data.DEFAULT_QUERY;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Room_data extends Data{
     public static final String DEFULT_QUERY = "select room_number, price, room_type, boolean_busy from Room";
@@ -9,19 +11,69 @@ public class Room_data extends Data{
         setQuery(DEFULT_QUERY);
     }
     
+    public void filter (String s){
+        switch (s){
+                 case "None":
+                     setQuery(DEFULT_QUERY);
+                     break;
+                 case "Busy":
+                     setQuery("select * from Room where boolean_busy = 'true'");
+                     break;
+                 case "NotBusy":
+                     setQuery("select * from Room where boolean_busy = 'false'");
+                     break;
+                 case "Single":
+                     setQuery("select * from Room where Room_type = 'Single'");
+                     break;
+                 case "Double":
+                     setQuery("select * from Room where Room_type = 'Double'");
+                     break;
+                 case "Quad":
+                    setQuery("select * from Room where Room_type = 'Quad'");
+                    break;
+                 case "Studio":
+                     setQuery("select * from Room where Room_type = 'Studio'");
+                     break;
+                 case "Suites":
+                     setQuery("select * from Room where Room_type = 'Suites'");
+                     break;
+             }
+    }
+    
+    public ArrayList RoomNubers (){
+        
+        ArrayList<String> rooms = new ArrayList<>();
+        
+        try {
+            resultSet = statement.executeQuery("Select room_number from Room");
+            int i = 0;
+            while (resultSet.next()){
+                rooms.add(i, resultSet.getString("room_number"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            return rooms;
+        }
+    }
+    
     public boolean add(String roomNumber, double price, String type){
         try {
             resultSet = statement.executeQuery("select * from Room where room_number = '"+
                     roomNumber+"'");
             if (resultSet.next()){
+                setQuery(DEFULT_QUERY);
                 return false;
             }else{
                 statement.executeUpdate("insert into Room (Room_number, price, Room_type, boolean_busy) values ('"+
                         roomNumber+"', "+price+", '"+type+"', 'false')");
             }
+            setQuery(DEFULT_QUERY);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            setQuery(DEFULT_QUERY);
             return false;
         }
     }
@@ -31,6 +83,8 @@ public class Room_data extends Data{
             statement.executeUpdate("delete from Room where Room_number = '"+roomNumber+"'");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            setQuery(DEFULT_QUERY);
         }
     }
     
@@ -42,6 +96,8 @@ public class Room_data extends Data{
                     "where Room_number = '"+oldRoomNumber+"'");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            setQuery(DEFULT_QUERY);
         }
     }
     

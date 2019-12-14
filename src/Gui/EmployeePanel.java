@@ -6,6 +6,7 @@
 package Gui;
 
 import Database.EmployeeData;
+import control.user_model;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,14 +49,19 @@ class EmployeePanel extends JPanel{
             JButton Delete ;
             JButton update;
             JTable EmployeeTable ;
-    public EmployeePanel() {
+            
+            user_model user_control;
+    public EmployeePanel(user_model user_control) {
+        
+        this.user_control = user_control;
+        
     Color c = new Color(173,216,230);
     
              this.setLayout(null);
         
         //_______________tables creation..____________________________________
 //        tablecreation
-        EmployeeTable = new JTable(DataEmployee); 
+        EmployeeTable = new JTable(user_control.getDataEmployee()); 
         JScrollPane scroll = new JScrollPane(EmployeeTable);//scroll 
         EmployeeTable.setToolTipText("Employee");
         
@@ -147,12 +153,12 @@ class EmployeePanel extends JPanel{
       public void mouseClicked(MouseEvent e) {
             row = EmployeeTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
-            id.setText(String.format("%s", DataEmployee.getValueAt(row, 0)));
+            id.setText(String.format("%s", EmployeeTable.getValueAt(row, 0)));
             id.setEditable(false);
-            name.setText(String.format("%s", DataEmployee.getValueAt(row, 1)));
-            nationality.setSelectedItem(DataEmployee.getValueAt(row, 2));
-            permissionSelection.setSelectedItem(DataEmployee.getValueAt(row, 3));
-            SetUsername.setText(String.format("%s", DataEmployee.getValueAt(row, 4)));
+            name.setText(String.format("%s", EmployeeTable.getValueAt(row, 1)));
+            nationality.setSelectedItem(EmployeeTable.getValueAt(row, 2));
+            permissionSelection.setSelectedItem(EmployeeTable.getValueAt(row, 3));
+            SetUsername.setText(String.format("%s", EmployeeTable.getValueAt(row, 4)));
             SetUsername.setEditable(false);
         }
     }
@@ -173,11 +179,10 @@ class EmployeePanel extends JPanel{
                     SetPassword.setText("");
                     EmployeeTable.getSelectionModel().clearSelection();
                 }else{
-                    if(DataEmployee.add(Integer.parseInt(id.getText()), name.getText(), 
+                    if(user_control.addEmployee(Integer.parseInt(id.getText()), name.getText(), 
                             (String)nationality.getSelectedItem(), (String)permissionSelection.getSelectedItem(),
                             SetUsername.getText(), SetPassword.getText()))
                     {
-                        DataEmployee.setQuery(DataEmployee.DEFUALT_QUERY);
                         JOptionPane.showMessageDialog(null, "Added successfully");
                     }else{
                         JOptionPane.showMessageDialog(null, "can't add exist id or user name","input Error", JOptionPane.ERROR_MESSAGE);
@@ -189,17 +194,16 @@ class EmployeePanel extends JPanel{
                 JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 if (ae.getSource() == Delete){
-                    DataEmployee.delete((int) DataEmployee.getValueAt(row, 0));
-                    DataEmployee.setQuery(DataEmployee.DEFUALT_QUERY);
+                    user_control.deleteEmployee((int) EmployeeTable.getValueAt(row, 0));
                     
                     JOptionPane.showMessageDialog(null, "deleted successfully");
                 }
                 else if (ae.getSource() == update){
-                    DataEmployee.update((int) DataEmployee.getValueAt(row, 0), 
+                    user_control.updateEmployee((int) EmployeeTable.getValueAt(row, 0), 
                             name.getText(), (String)nationality.getSelectedItem(), 
                             (String)permissionSelection.getSelectedItem(),
                             SetUsername.getText(), SetPassword.getText());
-                DataEmployee.setQuery(DataEmployee.DEFUALT_QUERY);
+                    
                     JOptionPane.showMessageDialog(null, "updated successfully");
                 }
             }

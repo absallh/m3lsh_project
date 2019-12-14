@@ -60,9 +60,5 @@ public abstract class person {
         this.age = age;
     }
     
-    abstract void add ();
-    
-    abstract void update ();
-    
     abstract void delete (int id);
 }

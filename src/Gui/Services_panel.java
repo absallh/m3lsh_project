@@ -6,7 +6,7 @@
 package Gui;
 
 
-import Database.Service_Data;
+import control.user_model;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,15 +36,19 @@ class Services_panel extends JPanel {
             JButton update;
             JTable SeviceTable ;
             // two Array one from database another String for column name
-            Service_Data ServicesData = new Service_Data();
                 Color c = new Color(173,216,230);
+                
+            user_model user_control;
 
-    public Services_panel() {
+    public Services_panel(user_model user_control) {
+        
+        this.user_control = user_control;
+        
              this.setLayout(null);
              this.setBackground(c);
              this.setBounds(250, 10, 1020, 650);
         //_______________tables creation..____________________________________
-        SeviceTable = new JTable(ServicesData);
+        SeviceTable = new JTable(user_control.getServiceData());
         JScrollPane scroll = new JScrollPane(SeviceTable);
         
         //_______Table charactaristics_________________________________
@@ -109,9 +113,9 @@ class Services_panel extends JPanel {
       public void mouseClicked(MouseEvent e) {
             row = SeviceTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
-            name.setText(String.format("%s", ServicesData.getValueAt(row, 0)));
-            describe.setText(String.format("%s", ServicesData.getValueAt(row, 1)));
-            price.setText(String.format("%s",ServicesData.getValueAt(row, 2)));
+            name.setText(String.format("%s", SeviceTable.getValueAt(row, 0)));
+            describe.setText(String.format("%s", SeviceTable.getValueAt(row, 1)));
+            price.setText(String.format("%s",SeviceTable.getValueAt(row, 2)));
         }
     }
     
@@ -126,7 +130,7 @@ class Services_panel extends JPanel {
                     describe.setText("");
                     SeviceTable.getSelectionModel().clearSelection();//clear the selection from the table
                 }else{
-                    if (ServicesData.add(name.getText(), Double.parseDouble(price.getText()), describe.getText())){
+                    if (user_control.addService(name.getText(), Double.parseDouble(price.getText()), describe.getText())){
                         JOptionPane.showMessageDialog(null, "Added successfully");
                     }
                     else{
@@ -137,16 +141,15 @@ class Services_panel extends JPanel {
                 JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 if (ae.getSource() == Delete){
-                    ServicesData.delete(String.format("%s",ServicesData.getValueAt(row, 0)));
+                    user_control.deleteService(String.format("%s",SeviceTable.getValueAt(row, 0)));
                     JOptionPane.showMessageDialog(null, "Deleted successfully");
                 }
                 else if (ae.getSource() == update){
-                    ServicesData.update(String.format("%s",ServicesData.getValueAt(row, 0)), 
+                    user_control.updateService(String.format("%s",SeviceTable.getValueAt(row, 0)), 
                             name.getText(), Double.parseDouble(price.getText()), describe.getText());
                     JOptionPane.showMessageDialog(null, "Updated successfully");
                 }
             }
-            ServicesData.setQuery(ServicesData.DEFUALT_QUERY);
         }
     }
         

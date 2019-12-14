@@ -20,13 +20,16 @@ public class EmployeeData extends Data{
             resultSet = statement.executeQuery("select id from Employee where id = "+
                     id+" or UserName = '"+userName+"'");
             if (resultSet.next()){//check if the id exist or not
+                setQuery(DEFUALT_QUERY);
                 return false;
             }else{
                 statement.executeUpdate(insertTransaction);//insert into the DB
+                setQuery(DEFUALT_QUERY);
                 return true;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            setQuery(DEFUALT_QUERY);
             return false;
         }
     }
@@ -37,6 +40,8 @@ public class EmployeeData extends Data{
             statement.executeUpdate(deleteStatment);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            setQuery(DEFUALT_QUERY);
         }
     }
     
@@ -52,6 +57,8 @@ public class EmployeeData extends Data{
         }catch (SQLException e)
         {
             e.printStackTrace();
+        }finally{
+            setQuery(DEFUALT_QUERY);
         }
     }
 

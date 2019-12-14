@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import control.user_model;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,8 @@ import javax.swing.JFrame;
  * @author HERO
  */
 public class UserModel extends Employee{
+    
+    user_model user_control;
     
     JFrame userFrame;
     //this is three panel that contain table and form of attribute 1 to customer , 2 to employee and 3 for service
@@ -45,6 +48,8 @@ public class UserModel extends Employee{
     
     @Override
     public void work (){
+        user_control = new user_model();
+        
         userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         userFrame.setSize(1500, 900);
         userFrame.setLocation(0,0);
@@ -56,13 +61,13 @@ public class UserModel extends Employee{
   //__________________________________________________________
 //   panel describtion
    
-        CustomerPanel = new CustomerPanel() ;
+        CustomerPanel = new CustomerPanel(user_control) ;
         
-        EmployeePanel = new EmployeePanel();
+        EmployeePanel = new EmployeePanel(user_control);
 
-        ServicesPanel = new Services_panel();
+        ServicesPanel = new Services_panel(user_control);
         
-        RoomPanel = new  Room_Panel ();
+        RoomPanel = new  Room_Panel (user_control);
         
         CustomerPanel.setBounds(250, 10, 1020, 650);
         EmployeePanel.setBounds(250, 10, 1020, 650);
@@ -109,9 +114,7 @@ public class UserModel extends Employee{
             @Override
             public void windowClosed( WindowEvent event )
             {
-               CustomerPanel.CoustomerData.disconnectFromDatabase();
-               EmployeePanel.DataEmployee.disconnectFromDatabase();
-               ServicesPanel.ServicesData.disconnectFromDatabase();
+               user_control.close();
                System.exit( 0 );
             } // end method windowClosed
          } // end WindowAdapter inner class

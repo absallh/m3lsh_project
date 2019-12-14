@@ -5,15 +5,13 @@
  */
 package Gui;
 
-import Database.CustomerData;
-import Database.Service_Data;
-import control.room;
+
+import control.user_model;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javafx.scene.control.*;
 import javax.swing.*;
 
@@ -23,6 +21,7 @@ import javax.swing.*;
  */
 class CustomerPanel extends JPanel {
 
+    user_model user_control;
           TableColumn  Customer_Name = new TableColumn("name") ;
         // Form
             JLabel CustomerName ;
@@ -45,11 +44,9 @@ class CustomerPanel extends JPanel {
              JScrollPane S1 ;
             //SOME ARRAY OF STRING FIRST FOR TABLE COLUMN NAME AND SECPND FOR NATIONALITY
 //                                       String [] ColumnName={"id","name","nationality","checkin Date","checkout","Services","AssginedRoom","Phone"};
-            CustomerData CoustomerData= new CustomerData();
+            
              String Nation [] ={"Egyption","Chinese","English","French","German","Italian","Japanese"
              ,"Russian","Spanish","American","Saudi Arabian","Australian","Belgian"} ;
-             ArrayList<room> SelctionRoom  = new ArrayList<>();
-             Service_Data  service = new Service_Data();
              //             this is array list from room type
             //_____________________________________________
             JButton Add ;
@@ -58,12 +55,13 @@ class CustomerPanel extends JPanel {
             JTable CustomerTable ;
                 Color c = new Color(173,216,230);
 
-    public CustomerPanel() {
+    public CustomerPanel(user_model user_control) {
                             // Panel Colore and positions in frame
+                        this.user_control = user_control;
         this.setLayout(null);
         this.setBackground(c);
         //_______________tables creation..____________________________________
-        CustomerTable= new JTable(CoustomerData);
+        CustomerTable= new JTable(user_control.getCustomerData());
         JScrollPane sc = new JScrollPane(CustomerTable, 
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -130,12 +128,7 @@ class CustomerPanel extends JPanel {
                                  RoomChoice = new JLabel("RoomChoice");
                                  RoomChoice.setBounds(10, 100, 150, 20);
                                  this.add(RoomChoice);
-                               selectroom = new JComboBox();
-                               int i=0;
-                               while (! SelctionRoom.isEmpty()){
-                               selectroom.addItem(SelctionRoom.get(i));
-                               i++;
-                               }
+                               selectroom = new JComboBox(user_control.getRoomNumbers());
                                selectroom.setBounds(100, 100, 150, 20);
                                this.add(selectroom);
       //____________________________________________________________________________________________                       
@@ -164,12 +157,12 @@ class CustomerPanel extends JPanel {
       public void mouseClicked(MouseEvent e) {
             row = CustomerTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
-            name.setText(String.format("%s", CoustomerData.getValueAt(row, 1)));
-            lastName_txt.setText(String.format("%s", CoustomerData.getValueAt(row, 2)));
-            nationality.setSelectedItem(CoustomerData.getValueAt(row, 3));
-            age_txt.setText(String.format("%s", CoustomerData.getValueAt(row, 4)));
-            checkin.setText(String.format("%s", CoustomerData.getValueAt(row, 5)));
-            checkout.setText(String.format("%s", CoustomerData.getValueAt(row, 6)));
+            name.setText(String.format("%s", CustomerTable.getValueAt(row, 1)));
+            lastName_txt.setText(String.format("%s", CustomerTable.getValueAt(row, 2)));
+            nationality.setSelectedItem(CustomerTable.getValueAt(row, 3));
+            age_txt.setText(String.format("%s", CustomerTable.getValueAt(row, 4)));
+            checkin.setText(String.format("%s", CustomerTable.getValueAt(row, 5)));
+            checkout.setText(String.format("%s", CustomerTable.getValueAt(row, 6)));
         }
     }
     
@@ -187,7 +180,7 @@ class CustomerPanel extends JPanel {
                     checkout.setText("");
                     CustomerTable.getSelectionModel().clearSelection();
                 }else{
-                    CoustomerData.add(name.getText(), lastName_txt.getText(), 
+                    user_control.add_customer(name.getText(), lastName_txt.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
                     
@@ -198,18 +191,17 @@ class CustomerPanel extends JPanel {
                 JOptionPane.showMessageDialog(null, "select any customer to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
             }else if (ae.getSource() == Delete){
                     int row = CustomerTable.getSelectedRow();//get selected row indext
-                    CoustomerData.delete((int) CoustomerData.getValueAt(row, 0));
+                    user_control.delete_customer((int) CustomerTable.getValueAt(row, 0));
                     JOptionPane.showMessageDialog(null, "Deleted suc");
             }
             else if (ae.getSource() == update){
                 
                     int row = CustomerTable.getSelectedRow();//get selected row indext
-                    CoustomerData.update((int) CoustomerData.getValueAt(row, 0), name.getText(), lastName.getText(), 
+                    user_control.update_customer((int) CustomerTable.getValueAt(row, 0), name.getText(), lastName.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
                         checkin.getText(), checkout.getText());
                 JOptionPane.showMessageDialog(null, "Added sec");
             }
-            CoustomerData.setQuery(CoustomerData.DEFUALT_QUERY);
         }
         
     }

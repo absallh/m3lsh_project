@@ -5,7 +5,9 @@
  */
 package Database;
 
+import static Database.Gust_mangement_data.DEFAULT_QUERY;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,14 +24,17 @@ public class Service_Data extends Data{
         try {
             resultSet = statement.executeQuery("SELECT * from Servicee where service_names = '" + name+"'");
             if (resultSet.next()){
+                setQuery(DEFUALT_QUERY);
                 return false;
             }else{
                 statement.executeUpdate("insert into Servicee VALUES ('"
                         +name+"' , '"+desc+"' , "+price+")");
+                setQuery(DEFUALT_QUERY);
                 return true;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            setQuery(DEFUALT_QUERY);
             return false;
         }
  }
@@ -41,7 +46,9 @@ public class Service_Data extends Data{
                     "where service_names = '"+oldName+"'");
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
+        }finally{
+         setQuery(DEFUALT_QUERY);
+     }
  }
  public void delete (String name){
      try {
@@ -49,6 +56,43 @@ public class Service_Data extends Data{
             statement.executeUpdate("delete from Servicee where service_names = '"+name+"'");
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
+        }finally{
+         setQuery(DEFUALT_QUERY);
+     }
  }
+ 
+ public ArrayList servicesNames (){
+         ArrayList <String> services = new ArrayList<>();
+        try {
+            resultSet = statement.executeQuery("select service_names from Servicee");
+            int i = 0;
+            while (resultSet.next()){
+                services.add(i, resultSet.getString("service_names"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            setQuery(DEFAULT_QUERY);
+            return services;
+        }
+    }
+ 
+ public ArrayList getAssignedServices(int id){
+        ArrayList<String> services = new ArrayList<>();
+         
+        try {
+            resultSet = statement.executeQuery("select service_names from customer_service where customer_id = "+id);
+            int i = 0;
+            while (resultSet.next()){
+                services.add(i, resultSet.getString("service_names"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            setQuery(DEFAULT_QUERY);
+            return services;
+        }
+     }
 }

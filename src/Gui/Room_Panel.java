@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import Database.Room_data;
+import control.user_model;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +27,8 @@ import javax.swing.ScrollPaneConstants;
  * @author HERO
  */
 public class Room_Panel extends JPanel {
+    
+    user_model user_control;
             JLabel RoomNumber ;
             JLabel Roomeprice ;
             JLabel RoomType ;
@@ -36,18 +38,19 @@ public class Room_Panel extends JPanel {
             JComboBox Type ;
             // create array for type of room
             String [] RoomTypes ={"Single","Double","Triple","Quad","Queen","King","Twin","Mini Suites","Master Suite","Others"};
-            public Room_data RoomData = new Room_data();
             //_____________________________________________
             JButton Add ;
             JButton Delete ;
             JButton update;
             JTable RoomTable ;
               Color c = new Color(173,216,230);
-    public Room_Panel() {
+    public Room_Panel(user_model user_control) {
+        this.user_control = user_control;
+        
                                 // Panel Colore and positions in frame
         this.setLayout(null);
         this.setBackground(c);
-          RoomTable= new JTable(RoomData);
+          RoomTable= new JTable(user_control.getRoomData());
         JScrollPane sc = new JScrollPane(RoomTable, 
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -113,9 +116,9 @@ public class Room_Panel extends JPanel {
       public void mouseClicked(MouseEvent e) {
             row = RoomTable.rowAtPoint(e.getPoint());//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
-            Rnum.setText(String.format("%s", RoomData.getValueAt(row, 0)));
-            price.setText(String.format("%s", RoomData.getValueAt(row, 1)));
-            Type.setSelectedItem(String.format("%s", RoomData.getValueAt(row, 2)));
+            Rnum.setText(String.format("%s", RoomTable.getValueAt(row, 0)));
+            price.setText(String.format("%s", RoomTable.getValueAt(row, 1)));
+            Type.setSelectedItem(String.format("%s", RoomTable.getValueAt(row, 2)));
         }
     }
     
@@ -130,7 +133,7 @@ public class Room_Panel extends JPanel {
                     Type.setSelectedIndex(0);
                     RoomTable.getSelectionModel().clearSelection();//clear the selection from the table
                 }else{
-                    if (RoomData.add(Rnum.getText(), Double.parseDouble(price.getText()),
+                    if (user_control.addRoom(Rnum.getText(), Double.parseDouble(price.getText()),
                             (String) Type.getSelectedItem())){
                         JOptionPane.showMessageDialog(null, "Added successfully");
                     }
@@ -142,16 +145,15 @@ public class Room_Panel extends JPanel {
             else if (RoomTable.getSelectionModel().isSelectionEmpty()){
                 JOptionPane.showMessageDialog(null, "select any Room to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
             }else if (ae.getSource() == Delete){
-                RoomData.delete(String.format("%s", RoomData.getValueAt(row, 0)));
+               user_control.deleteRoom(String.format("%s", RoomTable.getValueAt(row, 0)));
                 JOptionPane.showMessageDialog(null, "Deleted successfully");
             }
             else if (ae.getSource() == update){
-                RoomData.update(String.format("%s", RoomData.getValueAt(row, 0)), 
+                user_control.updateRoom(String.format("%s", RoomTable.getValueAt(row, 0)), 
                         Rnum.getText(), Double.parseDouble(price.getText()),
                         (String) Type.getSelectedItem());
                 JOptionPane.showMessageDialog(null, "updated successfully");
             }
-            RoomData.setQuery(RoomData.DEFULT_QUERY);
         }
         
     }

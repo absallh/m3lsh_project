@@ -1,47 +1,47 @@
 package control;
 
+import Database.Room_data;
+import java.util.ArrayList;
+
 public class room {
     private int room_number;
     private String room_type;
     private boolean busy;
+    private Room_data RoomData;
    //  private Data room_Data;
-
-    public int getRoom_number() {
-        return room_number;
+    
+    public room (){
+        RoomData = new Room_data();
     }
 
-    public void setRoom_number(int room_number) {
-        this.room_number = room_number;
-    }
-
-    public String getRoom_type() {
-        return room_type;
-    }
-
-    public void setRoom_type(String room_type) {
-        this.room_type = room_type;
-    }
-
-    public boolean isBusy() {
-        return busy;
-    }
-
-    public void setBusy(boolean busy) {
-        this.busy = busy;
+    public Room_data getRoomData() {
+        return RoomData;
     }
     
-    public void add_room ()
-    {
-        
+    public ArrayList RoomNubers (){
+        return RoomData.RoomNubers();
     }
     
-    public void delete_room (int room_number)
+    public boolean add_room (String roomNumber, double price, String type)
     {
-        
+        return RoomData.add(roomNumber, price, type);
     }
     
-    public void update_room()
+    public void delete_room (String roomNumber)
     {
-        
+        RoomData.delete(roomNumber);
+    }
+    
+    public void update_room(String oldRoomNumber,String newRoomNumber, double price, String type)
+    {
+        RoomData.update(oldRoomNumber, newRoomNumber, price, type);
+    }
+    
+    public void filter (String s){
+        RoomData.filter(s);
+    }
+
+    void close() {
+        RoomData.disconnectFromDatabase();
     }
 }

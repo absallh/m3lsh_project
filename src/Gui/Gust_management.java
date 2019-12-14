@@ -5,21 +5,16 @@
  */
 package Gui;
 
-import Database.*;
 import com.toedter.calendar.JDateChooser;
+import control.room_mangement;
 import java.awt.Color;
-import java.awt.List;
-import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -28,13 +23,14 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 /**
  *
  * @author HERO
  */
 public class Gust_management extends JPanel {
+    private room_mangement roomMange;
+    
      JLabel comming_Date ;
      JLabel checkOut ;
      JDateChooser checkinDate;
@@ -46,17 +42,17 @@ public class Gust_management extends JPanel {
      JButton Bill ;
      JButton submit;
      JComboBox rooms;
-    protected Gust_mangement_data CoustomerData;
          Color c =new Color(0,255,127);   
          String [] array ;
      JTable GustTable ;
-    public Gust_management() {
-        CoustomerData = new Gust_mangement_data();
+    public Gust_management(room_mangement roomMange) {
+        this.roomMange = roomMange;
+        
         this.setLayout(null);
         this.setBackground(c);
         this.setBounds(250, 10, 1020, 650);
                 //_______________tables creation..____________________________________
-        GustTable= new JTable(CoustomerData);
+        GustTable= new JTable(roomMange.getGustData());
         JScrollPane sc = new JScrollPane(GustTable);
         sc.setBounds(220, 400,1000, 200);
         this.add(sc);
@@ -93,10 +89,7 @@ public class Gust_management extends JPanel {
         JLabel assgin_room = new JLabel("Assgined Room");
         assgin_room.setBounds(550, 300, 150, 20);
         this.add(assgin_room);
-        
-        ArrayList rooms_list =  CoustomerData.RoomNubers();
-        String []rooms_array = (String[]) rooms_list.toArray(new String [rooms_list.size()]);
-        rooms = new JComboBox(rooms_array);
+        rooms = new JComboBox(roomMange.RoomNumbers());
         rooms.insertItemAt("none", 0);
         rooms.setSelectedIndex(0);
         rooms.setBounds(650, 300, 150, 20);
@@ -117,10 +110,8 @@ public class Gust_management extends JPanel {
                                  JPanel billpanel = new JPanel();
                                  billpanel.setBounds(10, 420, 1000, 200);
    //_______________________________________________________________________________
- 
-                                ArrayList servicesList = CoustomerData.servicesNames();
-                                array = (String[]) servicesList.toArray(new String [servicesList.size()]);
-                                Otherservice = new JList(array);
+
+                                Otherservice = new JList(roomMange.servicesNames());
                             Otherservice.setVisibleRowCount(5);
                             Otherservice.setFixedCellHeight(10);
                             Otherservice.setFixedCellWidth(100);
@@ -152,10 +143,9 @@ public class Gust_management extends JPanel {
       public void mouseClicked(MouseEvent e) {
             row = GustTable.getSelectedRow();//get mouse-selected row
             //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
-            ArrayList assigned = CoustomerData.getAssignedServices((int)GustTable.getValueAt(row, 0));
             GustTable.setRowSelectionInterval(row, row);
-            String[] selectedServices = (String[]) assigned.toArray(new String [assigned.size()]);
-            Assign_OtherService.setListData(selectedServices);
+            
+            Assign_OtherService.setListData(roomMange.getAssignedServices((int)GustTable.getValueAt(row, 0)));
             
             checkinDate.setDate((Date) GustTable.getValueAt(row, 3));
             checkoutDate.setDate((Date) GustTable.getValueAt(row, 4));
@@ -169,16 +159,11 @@ public class Gust_management extends JPanel {
         public void itemStateChanged(ItemEvent ie) {
             if(ie.getStateChange()== ItemEvent.SELECTED){
                 LocalDate today = LocalDate.now();//get the system date
-                
-                
-                CoustomerData.setQuery("select customer.customer_id, first_name, last_name, coming_date, check_out_date, customer_room.Room_number " +
-                            "from customer, customer_room " +
-                            "where customer.customer_id = customer_room.customer_id and check_out_date >= '"
-                        +today.plusDays(2)+"' "+ "and check_out_date <= '"
-                        + today.plusDays(4)+"'\n"+ "ORDER BY check_out_date ASC");
+
+                roomMange.showNearCheckout();
             }
             else{
-                CoustomerData.setQuery(CoustomerData.DEFAULT_QUERY);
+                roomMange.showAll();
             }
         }
        
@@ -194,12 +179,11 @@ public class Gust_management extends JPanel {
                 }else{
                     if (e.getSource() == submit){
                         String room = rooms.getSelectedItem().equals("none") ? null :  (String) rooms.getSelectedItem();
-                        CoustomerData.submit((int) GustTable.getValueAt(row, 0),
+                        roomMange.submit((int) GustTable.getValueAt(row, 0),
                                 checkinDate.getDate(), checkoutDate.getDate(), 
                                 room );
 
                         JOptionPane.showMessageDialog(null, "Submited");
-                        CoustomerData.setQuery(CoustomerData.DEFAULT_QUERY);
                         }
 
                     else if (e.getSource() == Bill){
@@ -207,7 +191,7 @@ public class Gust_management extends JPanel {
 
                   }else if(e.getSource()== SelectService){
                         Assign_OtherService.setListData( Otherservice.getSelectedValues());
-                        CoustomerData.assignServices((int) GustTable.getValueAt(row, 0), 
+                        roomMange.assignServices((int) GustTable.getValueAt(row, 0), 
                                 (String[]) Otherservice.getSelectedValuesList().toArray(new String[]{}));
                     }
             }

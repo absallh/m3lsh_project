@@ -1,50 +1,42 @@
 package control;
 
+import Database.EmployeeData;
 import javax.swing.JOptionPane;
 
 public class employee extends person {
-    protected String department;
     protected String permission;
-    protected employee employ;
     protected String Username ;
     protected String password ;
+    private EmployeeData DataEmployee;
     
     public employee (){
+        DataEmployee = new EmployeeData();
     }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
-
     
     public void work(){
-        JOptionPane.showMessageDialog(null, "Ask the admin to sit your premissions", "Alert", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Call the admin to set your permission");
+    }
+    
+    public EmployeeData getDataEmployee (){
+        return DataEmployee;
     }
 
     @Override
-    void update() {
-        
+    public void delete(int id) {
+        DataEmployee.delete(id);
     }
-
-    @Override
-    void delete(int id) {
-        
+    
+    public void update (int id, String name, String nationality, 
+            String premission, String userName, String Password){
+        DataEmployee.update(id, name, nationality, premission, userName, Password);
     }
-
-    @Override
-    void add() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public boolean add (int id, String name, String nationality, 
+            String premission, String userName, String Password){
+        return DataEmployee.add(id, name, nationality, premission, userName, Password);
+    }
+    
+    public void disconnect (){
+        DataEmployee.disconnectFromDatabase();
     }
 }

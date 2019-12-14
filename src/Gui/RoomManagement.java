@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import control.room_mangement;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,8 @@ import javax.swing.JFrame;
  * @author HERO
  */
 public class RoomManagement extends Employee {
+    room_mangement roomMange;
+    
      JFrame RoomFrame;
     //this is two panel that contain table and form of attribute 1 to gust and anothr for room
            Gust_management GustPanel  ; 
@@ -41,6 +44,7 @@ public class RoomManagement extends Employee {
     
     @Override
     public void work (){
+        roomMange = new room_mangement();
         Color c =new Color(0,191,255);
         RoomFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         RoomFrame.setSize(1500, 900);
@@ -49,8 +53,8 @@ public class RoomManagement extends Employee {
         RoomFrame.getContentPane().setBackground(c);
         RoomFrame.setLayout(null);
         
-        GustPanel = new Gust_management();
-        RoomPanel = new Room_management_panel();
+        GustPanel = new Gust_management(roomMange);
+        RoomPanel = new Room_management_panel(roomMange);
         
         myhandler hand = new myhandler ();
         
@@ -84,8 +88,7 @@ public class RoomManagement extends Employee {
             @Override
             public void windowClosed( WindowEvent event )
             {
-               GustPanel.CoustomerData.disconnectFromDatabase();
-               RoomPanel.RoomData.disconnectFromDatabase();
+               
                System.exit( 0 );
             } // end method windowClosed
          } // end WindowAdapter inner class
