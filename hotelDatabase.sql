@@ -13,8 +13,8 @@ create table Employee(
 
 create table customer(
 	customer_id int identity(1,1) primary key,
-	Fname varchar(20) not null,
-	Lname varchar (20),
+	First_name varchar(20) not null,
+	Last_name varchar (20),
 	nationality varchar(20),
 	age int,
 	coming_date date,
@@ -23,14 +23,15 @@ create table customer(
 
 create table Room(
 	Room_number varchar(10) not null,
-	price int not null,
-	boolean_busy varchar(50) not null,
+	price int,
+	boolean_busy varchar(50),
 	primary key(Room_number)
 );
 
 create table bill(
 	bill_id int identity(1,1) primary key,
 	customerID int,
+	boolean_paied varchar(20),
 	foreign key (customerID) references customer(customer_id)
 );
 

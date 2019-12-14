@@ -145,7 +145,7 @@ class EmployeePanel extends JPanel{
                  EmployeeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                  
                  
-                                 this.setVisible(true);
+                                 this.setVisible(false);
     }                      
     int row;//the selected row index
     private class tableMouseListener extends MouseAdapter{

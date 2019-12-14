@@ -107,7 +107,7 @@ public class Room_Panel extends JPanel {
                 Delete.addActionListener(action);
                 update.addActionListener(action);
                 
-                this.setVisible(true);
+                this.setVisible(false);
     }
     
     int row;
