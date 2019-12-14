@@ -5,8 +5,8 @@
  */
 package Gui;
 
-import com.toedter.calendar.JDateChooser;
 import control.room_mangement;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,15 +14,17 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -158,8 +160,6 @@ public class Gust_management extends JPanel {
         @Override
         public void itemStateChanged(ItemEvent ie) {
             if(ie.getStateChange()== ItemEvent.SELECTED){
-                LocalDate today = LocalDate.now();//get the system date
-
                 roomMange.showNearCheckout();
             }
             else{
@@ -180,8 +180,7 @@ public class Gust_management extends JPanel {
                     if (e.getSource() == submit){
                         String room = rooms.getSelectedItem().equals("none") ? null :  (String) rooms.getSelectedItem();
                         roomMange.submit((int) GustTable.getValueAt(row, 0),
-                                checkinDate.getDate(), checkoutDate.getDate(), 
-                                room );
+                                checkinDate.getDate(), checkoutDate.getDate(), room );
 
                         JOptionPane.showMessageDialog(null, "Submited");
                         }

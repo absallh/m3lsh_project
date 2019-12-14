@@ -1,20 +1,18 @@
 package control;
 
 import Database.CustomerData;
-import Database.Gust_mangement_data;
 import Database.Room_data;
 import Database.Service_Data;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class user_model extends employee {
     private customer customer;
-    private Gust_mangement_data gustMangeData;//to get just the room numbers
     private room Room;
     private service Service;
     
     public user_model (){
         customer = new customer();
-        gustMangeData = new Gust_mangement_data();
         Room = new room(); 
         Service = new service();
     }
@@ -24,18 +22,18 @@ public class user_model extends employee {
     }
     
     public String[] getRoomNumbers (){
-        ArrayList rooms_list =  gustMangeData.RoomNubers();
+        ArrayList rooms_list =  Room.RoomNubers();
         String []rooms_array = (String[]) rooms_list.toArray(new String [rooms_list.size()]);
         return rooms_array;
     }
     
     public void add_customer(String frist_name, String lastName, String nationality, 
-            int age, String commingDate, String checkOutDate) {
+            int age, Date commingDate, Date checkOutDate) {
         customer.add(frist_name, lastName, nationality, age, commingDate, checkOutDate);
     }
 
     public void update_customer (int ID, String frist_name, String lastName, String nationality, 
-            int age, String commingDate, String checkOutDate) {
+            int age, Date commingDate, Date checkOutDate) {
         customer.update(ID, frist_name, lastName, nationality, age, commingDate, checkOutDate);
     }
 
@@ -93,7 +91,6 @@ public class user_model extends employee {
         customer.close();
         Room.close();
         Service.close();
-        gustMangeData.disconnectFromDatabase();
         disconnect();//inherted from employee class
     }
 

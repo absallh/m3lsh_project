@@ -22,17 +22,19 @@ public class room_mangement extends employee {
     }
     
     public Gust_mangement_data getGustData() {
-        return customer.getGustData();
+        return Room.getGustData();
     }
     
     public String[] RoomNumbers (){
         ArrayList rooms_list =  Room.RoomNubers();
+        //convert ArrayList to array
         String []rooms_array = (String[]) rooms_list.toArray(new String [rooms_list.size()]);
         return rooms_array;
     }
     
     public String[] servicesNames(){
         ArrayList services_list =  service.servicesNames();
+        //convert ArrayList to array
         String []services_array = (String[]) services_list.toArray(new String [services_list.size()]);
         return services_array;
     }
@@ -44,19 +46,19 @@ public class room_mangement extends employee {
     }
     
     public void showNearCheckout (){
-        customer.showNearCheckout();
+        Room.showNearCheckout();
     }
     
     public void showAll (){
-        customer.showAll();
+        Room.showAll();
     }
     
     public void submit(int id, Date comminDate, Date checkout, String roomNuber){
-        customer.submit(id, comminDate, checkout, roomNuber);
+        Room.RoomMangerSubmit(id, comminDate, checkout, roomNuber);
     }
     
     public void assignServices (int id, String []services){
-        customer.assignServices(id, services);
+        service.assignServices(id, services);
     }
     
     public void filter (String s){

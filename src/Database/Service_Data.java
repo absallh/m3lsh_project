@@ -7,6 +7,7 @@ package Database;
 
 import static Database.Gust_mangement_data.DEFAULT_QUERY;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @author absal
  */
 public class Service_Data extends Data{
-    public static final String DEFUALT_QUERY = "SELECT * from Servicee";
+    private static final String DEFUALT_QUERY = "SELECT * from Servicee";
             
  public Service_Data (){
         setQuery(DEFUALT_QUERY);
@@ -95,4 +96,17 @@ public class Service_Data extends Data{
             return services;
         }
      }
+ 
+ public void assignServices (int id, String []services){
+        try{
+            for (String oneService : services){
+                statement.executeUpdate("insert into customer_service (customer_id, service_names, use_time) values ("+
+                        id+", '"+ oneService+"', '"+LocalDate.now()+"')");
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            setQuery(DEFAULT_QUERY);
+        }
+    }
 }

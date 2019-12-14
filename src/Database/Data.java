@@ -20,7 +20,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public abstract class Data extends AbstractTableModel{
     
-    protected static final String db_Url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDataBase;user=omar;password=omar";
+    static final String db_Url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDataBase;user=omar;password=omar";
     protected Connection connection = null;
     protected Statement statement = null;
     protected ResultSet resultSet = null;

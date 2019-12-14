@@ -6,6 +6,7 @@
 package Database;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -128,6 +129,21 @@ public class Gust_mangement_data extends Data {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally {
+            setQuery(DEFAULT_QUERY);
         }
+    }
+    
+    public void showNearcheckout (){
+        setQuery("select customer.customer_id, first_name, last_name, coming_date, check_out_date, customer_room.Room_number " +
+                            "from customer, customer_room " +
+                            "where customer.customer_id = customer_room.customer_id and check_out_date >= '"
+                        +LocalDate.now().plusDays(2)+"' "+ "and check_out_date <= '"
+                        + LocalDate.now().plusDays(4)+"'\n"+ "ORDER BY check_out_date ASC");
+        
+    }
+    
+    public void showAll (){
+        setQuery(DEFAULT_QUERY);
     }
 }

@@ -4,10 +4,6 @@ import Database.Service_Data;
 import java.util.ArrayList;
 
 public class service {
-    public String service_name;
-    private double price;
-    private String description;
-    private int usage_per_day;
     private Service_Data service_Data;
     
     public service (){
@@ -39,6 +35,10 @@ public class service {
     
     public ArrayList getAssignedServices(int id){
         return service_Data.getAssignedServices(id);
+    }
+    
+    public void assignServices (int id, String []services){
+        service_Data.assignServices(id, services);
     }
 
     void close() {

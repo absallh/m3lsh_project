@@ -3,7 +3,7 @@ package Database;
 import java.sql.SQLException;
 
 public class EmployeeData extends Data{
-    public static final String DEFUALT_QUERY = "select id, employee_name, "+
+    private static final String DEFUALT_QUERY = "select id, employee_name, "+
             "nationality, permition, UserName from Employee";
     
     public EmployeeData (){
@@ -13,7 +13,7 @@ public class EmployeeData extends Data{
     public boolean add(int id, String name, String nationality, 
             String premission, String userName, String Password){
         
-        String insertTransaction = "INSERT INTO Employee "
+        String insertTransaction = "INSERT INTO Employee (id, employee_name, nationality, permition, UserName, user_password)"
                 +"values ("+id+",'"+name+"','"+nationality+"','"
                 +premission+"','"+userName+"','"+Password+"')";
         try {

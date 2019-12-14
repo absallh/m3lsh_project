@@ -6,7 +6,6 @@
 package Gui;
 
 
-import Database.Room_data;
 import control.room_mangement;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -25,12 +24,8 @@ public class Room_management_panel extends JPanel{
     
     JLabel Filter ;
       JComboBox filterrooms ;
-      String [] ColumnName={"Room Name","Room Number ","Room Price","Busy OR Not"};
-      protected Room_data RoomData= new Room_data();
       JTable ROOMTable ;
       String []filter ={"None" , "Busy", "NotBusy" , "Single", "Double", "Quad", "Studio", "Suites"};
-      JComboBox AssignRoom ;
-      JLabel Assign_Room ;
       String []roomData = {"Room number", "Type"};
       Color c =new Color(0,255,127);
     public Room_management_panel(room_mangement roomMange) {
@@ -52,16 +47,11 @@ public class Room_management_panel extends JPanel{
                           filterrooms = new JComboBox(filter);
                           
                           filterrooms.setBounds(850, 30, 120, 20);
+                          filterrooms.addActionListener(new filterAction());
                                  this.add(Filter);
                                  this.add(filterrooms);
       //_____________________________________________________________________________
-                      Assign_Room =new JLabel("Assign Room to the Gust");
-                      Assign_Room.setBounds(210, 350, 200, 150);
-                      this.add(Assign_Room);
-                      AssignRoom = new JComboBox(roomData);
-                      AssignRoom.setBounds(200, 450, 150, 20);
-                      this.add(AssignRoom);        
-        
+                      
         this.setVisible(true);
     }
     
@@ -71,8 +61,7 @@ public class Room_management_panel extends JPanel{
         public void actionPerformed(ActionEvent e)
         {
             //String []filter ={"None" , "Busy", "NotBusy" , "Single", "Double", "Quad", "Studio", "Suites"};
-             String s = (String) filterrooms.getSelectedItem();//get the selected item
-             roomMange.filter(s);
+             roomMange.filter((String) filterrooms.getSelectedItem());
         }
     }
     

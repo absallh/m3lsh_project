@@ -88,7 +88,7 @@ public class RoomManagement extends Employee {
             @Override
             public void windowClosed( WindowEvent event )
             {
-               
+               roomMange.close();
                System.exit( 0 );
             } // end method windowClosed
          } // end WindowAdapter inner class

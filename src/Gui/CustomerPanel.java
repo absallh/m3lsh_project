@@ -6,12 +6,14 @@
 package Gui;
 
 
+import com.toedter.calendar.JDateChooser;
 import control.user_model;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import javafx.scene.control.*;
 import javax.swing.*;
 
@@ -36,8 +38,8 @@ class CustomerPanel extends JPanel {
             JTextField age_txt ;
             JTextField lastName_txt ;
             JComboBox nationality ;
-            JTextField checkin ;
-            JTextField checkout ;
+            JDateChooser checkin ;
+            JDateChooser checkout ;
             // Deficult m3lesh tell me what i do because i dont know
             JButton Click;
             JComboBox selectroom ;
@@ -105,14 +107,14 @@ class CustomerPanel extends JPanel {
   //____________________________________________________________________________
                                 commingDate = new JLabel("Check In Date") ;
                                     commingDate.setBounds(10, 50, 150, 20);
-                                checkin = new JTextField(10) ;
+                                checkin = new JDateChooser() ;
                                    checkin.setBounds(100, 50, 150, 20);
                                   this.add(commingDate);
                                    this.add(checkin);
    //_________________________________________________________
                                        ccheckOut = new JLabel("Check Out Date ") ;
                                         ccheckOut.setBounds(270, 50, 150, 20);
-                                       checkout = new JTextField(10) ;
+                                       checkout = new JDateChooser() ;
                                         checkout.setBounds(370, 50, 150, 20);
                                  this.add(ccheckOut);
                                  this.add(checkout);
@@ -161,8 +163,8 @@ class CustomerPanel extends JPanel {
             lastName_txt.setText(String.format("%s", CustomerTable.getValueAt(row, 2)));
             nationality.setSelectedItem(CustomerTable.getValueAt(row, 3));
             age_txt.setText(String.format("%s", CustomerTable.getValueAt(row, 4)));
-            checkin.setText(String.format("%s", CustomerTable.getValueAt(row, 5)));
-            checkout.setText(String.format("%s", CustomerTable.getValueAt(row, 6)));
+            checkin.setDate((Date) CustomerTable.getValueAt(row, 5));
+            checkout.setDate((Date) CustomerTable.getValueAt(row, 6));
         }
     }
     
@@ -176,13 +178,13 @@ class CustomerPanel extends JPanel {
                     lastName_txt.setText("");
                     nationality.setSelectedIndex(0);
                     age_txt.setText("");
-                    checkin.setText("");
-                    checkout.setText("");
+                    checkin.setCalendar(null);
+                    checkout.setCalendar(null);
                     CustomerTable.getSelectionModel().clearSelection();
                 }else{
                     user_control.add_customer(name.getText(), lastName_txt.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
-                        checkin.getText(), checkout.getText());
+                        checkin.getDate(), checkout.getDate());
                     
                     JOptionPane.showMessageDialog(null, "Added sec");
                 }
@@ -199,7 +201,7 @@ class CustomerPanel extends JPanel {
                     int row = CustomerTable.getSelectedRow();//get selected row indext
                     user_control.update_customer((int) CustomerTable.getValueAt(row, 0), name.getText(), lastName.getText(), 
                         (String) nationality.getSelectedItem(), Integer.parseInt(age_txt.getText()), 
-                        checkin.getText(), checkout.getText());
+                        checkin.getDate(), checkout.getDate());
                 JOptionPane.showMessageDialog(null, "Added sec");
             }
         }
