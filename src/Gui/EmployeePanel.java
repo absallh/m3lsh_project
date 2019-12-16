@@ -102,27 +102,27 @@ class EmployeePanel extends JPanel{
                                  this.add(SetUsername);
      //__________________________________________________________
                           EmployeeNationality = new JLabel("Employee Nationality") ;
-                          EmployeeNationality.setBounds(550, 50, 150, 20);
+                          EmployeeNationality.setBounds(550, 10, 150, 20);
                           nationality = new JComboBox(Nation);
                           
-                          nationality.setBounds(670, 50, 150, 20);
+                          nationality.setBounds(670, 10, 150, 20);
                                  this.add(EmployeeNationality);
                                  this.add(nationality);
      //__________________________________this is the permission  label and combobox that take data from permissions array_________________________________________-
                                 permission = new JLabel("permission");
-                                permission.setBounds(10, 100, 150, 20);
+                                permission.setBounds(10, 50, 150, 20);
                                 this.add(permission);
                                 permissionSelection= new JComboBox(Permissions);
                                 
-                                permissionSelection.setBounds(100, 100, 150, 20);
+                                permissionSelection.setBounds(100, 50, 150, 20);
                                 this.add(permissionSelection);
      //_____________________________ now set password label and field____________________________
                                 password = new JLabel("Set Password");
-                                password.setBounds(10, 140, 150, 20);
+                                password.setBounds(550, 50, 150, 20);
                                 this.add(password);
                                 
                                 SetPassword = new JPasswordField();
-                                SetPassword.setBounds(100, 140, 150, 20);
+                                SetPassword.setBounds(670, 50, 150, 20);
                                 this.add(SetPassword);
                                 
                                 
