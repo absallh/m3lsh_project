@@ -5,9 +5,11 @@ import java.util.Date;
 
 public class customer extends person {
     private CustomerData CoustomerData;
+    private bill bill;
     
     public customer (){
         CoustomerData = new CustomerData();
+        bill = new bill();
     }
     
     public CustomerData getCustomerData(){

@@ -38,7 +38,7 @@ public class login {
                 user = new RoomManagement();
                 break;
             case "other_services":
-                //user = new other_services();
+                user = new OtherServiceModel();
                 break;
             default :
                 user = new Employee();

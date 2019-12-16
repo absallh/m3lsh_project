@@ -7,7 +7,6 @@ package Gui;
 
 import control.room_mangement;
 import com.toedter.calendar.JDateChooser;
-import control.bill;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,8 +44,6 @@ public class Gust_management extends JPanel {
      JButton Bill ;
      JButton submit;
      JComboBox rooms;
-     JScrollPane billScroll ;
-     bill billpanel  ;
          Color c =new Color(0,255,127);   
          String [] array ;
      JTable GustTable ;
@@ -110,14 +107,13 @@ public class Gust_management extends JPanel {
    //______________________________________________________________________
                                  Bill = new JButton("Bill");
                                  Bill.setBounds(10, 400, 1000, 50);
-                                 Bill.addActionListener(actionButton);
+                                // Bill.addActionListener(new help());
                                  this.add(Bill);
-//                                 Bill billpanel = new Bill();
-//                                 billpanel.setBounds(10, 420, 1000, 200);
-//                                 this.add(billpanel);
+                                 JPanel billpanel = new JPanel();
+                                 billpanel.setBounds(10, 420, 1000, 200);
    //_______________________________________________________________________________
 
-                            Otherservice = new JList(roomMange.servicesNames());
+                                Otherservice = new JList(roomMange.servicesNames());
                             Otherservice.setVisibleRowCount(5);
                             Otherservice.setFixedCellHeight(10);
                             Otherservice.setFixedCellWidth(100);
@@ -190,12 +186,7 @@ public class Gust_management extends JPanel {
                         }
 
                     else if (e.getSource() == Bill){
-                        String []services={"food","swim","run","read","haha","m3lesh"};
-                        double [] prices ={300,600,88,50,330,80};
-                     Bill b = new Bill();
-                     b.showBill(1, "ahmed", 2, "6a" ,5 , 30,services,prices);
-                     b.setVisible(true);
-                      
+                      JOptionPane.showConfirmDialog(null, "Generate bill");
 
                   }else if(e.getSource()== SelectService){
                         Assign_OtherService.setListData( Otherservice.getSelectedValues());

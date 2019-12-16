@@ -1,28 +1,29 @@
 package control;
 
+import Database.Service_Data;
 import javax.swing.JOptionPane;
 
 public class other_services extends employee {
-    private service serv;
+    private service service;
     
+    public other_services (){
+        service = new service();
+    }
     
-    void add() {
-        
+    public Service_Data getServiceData (){
+        return service.getService_Data();
     }
-
     
-    void update() {
-        
+    public boolean addService (String name, double price, String desc){
+        return service.add_service(name, price, desc);
     }
-
-    @Override
-    public void delete(int id) {
-        
+    
+    public void deleteService (String service_name){
+        service.delete_service(service_name);
     }
-
-    @Override
-    public void work() {
-        JOptionPane.showMessageDialog(null, "Welcom to other_services", "Other_services", JOptionPane.PLAIN_MESSAGE);
+    
+    public void updateService (String oldName, String name, double price, String desc){
+        service.update_service(oldName, name, price, desc);
     }
     
 }

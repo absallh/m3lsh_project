@@ -102,7 +102,7 @@ class Services_panel extends JPanel {
                          update.addActionListener(action);
                          Delete.addActionListener(action);
                          
-                           this.setVisible(false);
+                           this.setVisible(true);
                                  
                                  
     }

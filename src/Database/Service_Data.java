@@ -53,6 +53,7 @@ public class Service_Data extends Data{
  }
  public void delete (String name){
      try {
+            statement.executeUpdate("delete from customer_service where service_names = '"+name+"'");
             statement.executeUpdate("delete from Room_services where services_name = '"+name+"'");
             statement.executeUpdate("delete from Servicee where service_names = '"+name+"'");
         } catch (SQLException ex) {

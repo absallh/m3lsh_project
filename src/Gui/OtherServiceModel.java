@@ -5,17 +5,20 @@
  */
 package Gui;
 
-import Database.Service_Data;
+import control.other_services;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
@@ -29,16 +32,17 @@ JFrame OtherServiceFrame ;
     JLabel service_name ;
     JLabel Serviceprice ;
     JLabel description ;
-        JTextField name ;
-        JTextField price ;
-        JTextField describe ;
-            JButton Add ,Delete ;
-                JTable OtherServiceTable ;
-                    JButton GenerateReport ;
-   Service_Data OtherServiceData;
+    JTextField name ;
+    JTextField price ;
+    JTextArea describe ;
+    JButton Add ,Delete, update ;
+    JTable OtherServiceTable ;
+    JButton GenerateReport ;
+                    
+    other_services OtherServiceControl;
     
     public OtherServiceModel() {
-        this.OtherServiceData = new Service_Data();
+        this.OtherServiceControl = new other_services();
         OtherServiceFrame = new JFrame ();
     }
 
@@ -53,7 +57,7 @@ JFrame OtherServiceFrame ;
      
       //____________________________________________________________________________________
        // table:
-         OtherServiceTable= new JTable(OtherServiceData);
+         OtherServiceTable= new JTable(OtherServiceControl.getServiceData());
         JScrollPane sc = new JScrollPane(OtherServiceTable, 
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -61,6 +65,7 @@ JFrame OtherServiceFrame ;
         OtherServiceFrame.add(sc);
         //_______Table charactaristics_________________________________
         OtherServiceTable.setBackground(Color.WHITE);
+        OtherServiceTable.addMouseListener(new tableMouseListener());
         
         sc.setBounds(10, 10,500, 400);
         
@@ -88,15 +93,15 @@ JFrame OtherServiceFrame ;
                     description = new JLabel("description") ;
                      description.setForeground(Color.WHITE);
                     description.setBounds(550, 500, 150, 20);
-                    describe = new JTextField() ;
+                    describe = new JTextArea() ;
                     describe.setBounds(660, 500, 150, 20);
                          OtherServiceFrame.add(description);
                          OtherServiceFrame.add(describe);
    //__________________________________________________________________________
                          
-                ImageIcon  ADDIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\Add-icon.png");
-                ImageIcon  DeleteIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\Actions-window-close-icon.png");
-                  ImageIcon  ReportIcon= new ImageIcon("F:\\m3lsh_project\\src\\Gui\\33.png");
+                ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("Add-icon.png"));
+                ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("Actions-window-close-icon.png"));
+                  ImageIcon  ReportIcon= new ImageIcon(getClass().getResource("33.png"));
   //____________________________________________________________________________
                              
                            GenerateReport = new JButton(ReportIcon);
@@ -119,8 +124,16 @@ JFrame OtherServiceFrame ;
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(260, 410, 250, 50);
                          OtherServiceFrame.add(Delete);
+                         update = new JButton("Update");
+                         update.setBounds(370, 410, 250, 50);
+                         OtherServiceFrame.add(update);
                          
-                           ImageIcon back = new ImageIcon("F:\\m3lsh_project\\src\\Gui\\hotel.jpg");
+                         buttonAction action = new buttonAction();
+                         Add.addActionListener(action);
+                         Delete.addActionListener(action);
+                         update.addActionListener(action);
+                         
+                           ImageIcon back = new ImageIcon(getClass().getResource("hotel.jpg"));
                            paint = new JLabel(back);
                            paint.setBounds(0, 0, 1500, 900);
                            OtherServiceFrame.add(paint);
@@ -128,6 +141,58 @@ JFrame OtherServiceFrame ;
                          
                OtherServiceFrame.setVisible(true);
     }
-  
+    
+    int row;//the selected row index
+    private class tableMouseListener extends MouseAdapter{
+      @Override
+      public void mouseClicked(MouseEvent e) {
+            row = OtherServiceTable.rowAtPoint(e.getPoint());//get mouse-selected row
+            //int col = GustTable.columnAtPoint(e.getPoint());//get mouse-selected col
+            
+            name.setText((String) OtherServiceTable.getValueAt(row, 0));
+            describe.setText((String) OtherServiceTable.getValueAt(row, 1));
+            price.setText((String) OtherServiceTable.getValueAt(row, 2));
+        }
+    }
+    
+    
+    private class buttonAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (ae.getSource() == Add){
+                if(!OtherServiceTable.getSelectionModel().isSelectionEmpty()){
+                    name.setText("");
+                    price.setText("");
+                    describe.setText("");
+                    OtherServiceTable.getSelectionModel().clearSelection();
+                }else{
+                    if(OtherServiceControl.addService(name.getText(), 
+                            Double.parseDouble(price.getText()), describe.getText()))
+                    {
+                        JOptionPane.showMessageDialog(null, "Added successfully");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "can't add exist id or user name","input Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }//end of Add action
+            
+            else if (OtherServiceTable.getSelectionModel().isSelectionEmpty()){
+                JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                if (ae.getSource() == Delete){
+                    OtherServiceControl.deleteService((String) OtherServiceTable.getValueAt(row, 0));
+                    JOptionPane.showMessageDialog(null, "deleted successfully");
+                }
+                else if (ae.getSource() == update){
+                    OtherServiceControl.updateService((String) OtherServiceTable.getValueAt(row, 0),
+                            name.getText(), Double.parseDouble(price.getText()), describe.getText());
+                    
+                    JOptionPane.showMessageDialog(null, "updated successfully");
+                }
+            }
+        }
+        
+    }
     
 }
