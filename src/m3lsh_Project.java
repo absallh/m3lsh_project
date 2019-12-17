@@ -5,7 +5,7 @@ import Gui.UserModel;
 public class m3lsh_Project {
 
     public static void main(String []args){
-        RoomManagement start = new RoomManagement();
+        OtherServiceModel start = new OtherServiceModel();
         start.work();
     }
 }
