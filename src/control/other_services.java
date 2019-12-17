@@ -48,6 +48,8 @@ public class other_services extends employee {
         service.update_service(oldName, name, price, desc);
     }
     
-    
+    public void close(){
+        service.close();
+    }
     
 }
