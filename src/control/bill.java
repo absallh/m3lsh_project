@@ -9,8 +9,4 @@ public class bill {
     public bill(){
         data = new bill_Data();
     }
-    
-    public ArrayList showServicesPrices (ArrayList service){
-        return data.showServicesPrices(service);
-    }
 }

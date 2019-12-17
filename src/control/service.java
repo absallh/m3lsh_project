@@ -9,6 +9,14 @@ public class service {
     public service (){
         service_Data = new Service_Data();
     }
+    
+    public ArrayList getServiceDates (String serviceName){
+        return service_Data.getServiceDates(serviceName);
+    }
+    
+    public ArrayList countService(ArrayList dates, String serviceName){
+        return service_Data.countService(dates, serviceName);
+    }
 
     public Service_Data getService_Data() {
         return service_Data;

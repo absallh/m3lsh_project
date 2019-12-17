@@ -7,10 +7,15 @@ package Database;
 
 import static Database.Gust_mangement_data.DEFAULT_QUERY;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -99,6 +104,54 @@ public class Service_Data extends Data{
         }
     }
  
+ public ArrayList getServiceDates (String serviceName){
+     ArrayList<String> dates = new ArrayList<>();
+     
+        try {
+            Date firstDate = null;
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            resultSet = statement.executeQuery("select min(coming_date) \n" +
+                    "from customer full join customer_service \n" +
+                    "on service_names = '"+serviceName+"'");
+            if (resultSet.next()){
+                firstDate = resultSet.getDate(1);
+                cal.setTime(firstDate);
+            }
+            do{
+                dates.add(simpleDateFormat.format(firstDate));
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                firstDate = cal.getTime();
+            }while(firstDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            setQuery(DEFUALT_QUERY);
+            return dates;
+        }
+ }
+ 
+ public ArrayList countService(ArrayList dates, String serviceName){
+     ArrayList<Integer> count = new ArrayList<>();
+     
+     try{
+         for (int i = 0; i < dates.size(); i++){
+             resultSet = statement.executeQuery("select COUNT(service_names)\n" +
+                    "from customer left join customer_service\n" +
+                    "on service_names = '"+serviceName+"' and coming_date <= '"+
+                     dates.get(i)+"' and check_out_date >= '"+dates.get(i)+"'");
+             if (resultSet.next()){
+                 count.add((resultSet.getInt(1))/4);
+             }
+         }
+     }catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            setQuery(DEFUALT_QUERY);
+            return count;
+        }
+ }
+ 
  public ArrayList getAssignedServices(int id){
         ArrayList<String> services = new ArrayList<>();
          
@@ -128,9 +181,5 @@ public class Service_Data extends Data{
         }finally{
             setQuery(DEFAULT_QUERY);
         }
-    }
-
-    ArrayList getServicesPrice(ArrayList service) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

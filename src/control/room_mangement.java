@@ -17,10 +17,6 @@ public class room_mangement extends employee {
         service = new service();
     }
     
-    public ArrayList showServicesPrices (ArrayList service){
-        return customer.showServicesPrices(service);
-    }
-    
     public Room_data getRoomData (){
         return Room.getRoomData();
     }

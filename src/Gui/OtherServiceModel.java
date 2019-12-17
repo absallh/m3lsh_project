@@ -94,7 +94,7 @@ JFrame OtherServiceFrame ;
                      description.setForeground(Color.WHITE);
                     description.setBounds(550, 500, 150, 20);
                     describe = new JTextArea() ;
-                    describe.setBounds(660, 500, 150, 20);
+                    describe.setBounds(660, 500, 600, 80);
                          OtherServiceFrame.add(description);
                          OtherServiceFrame.add(describe);
    //__________________________________________________________________________
@@ -105,17 +105,6 @@ JFrame OtherServiceFrame ;
   //____________________________________________________________________________
                              
                            GenerateReport = new JButton(ReportIcon);
-                           GenerateReport.addActionListener(new ActionListener(){
-
-           @Override
-           public void actionPerformed(ActionEvent e) {
-              int count [] ={2,3,5,9,6};
-              String []date ={"14/2","3/7","7/9","3/6","1/5"};
-                   ReportFrame Report = new ReportFrame();
-                   Report.DataService(count, date);
-                   Report.work();
-           }
-       });
                            GenerateReport.setBounds(1200, 10, 150, 100);
                            OtherServiceFrame.add(GenerateReport);
 
@@ -133,6 +122,7 @@ JFrame OtherServiceFrame ;
                          Add.addActionListener(action);
                          Delete.addActionListener(action);
                          update.addActionListener(action);
+                         GenerateReport.addActionListener(action);
                          
                            ImageIcon back = new ImageIcon(getClass().getResource("hotel.jpg"));
                            paint = new JLabel(back);
@@ -152,7 +142,8 @@ JFrame OtherServiceFrame ;
             
             name.setText((String) OtherServiceTable.getValueAt(row, 0));
             describe.setText((String) OtherServiceTable.getValueAt(row, 1));
-            price.setText((String) OtherServiceTable.getValueAt(row, 2));
+            price.setText(String.format("%s", 
+                    OtherServiceTable.getValueAt(row, 2)));
         }
     }
     
@@ -181,15 +172,24 @@ JFrame OtherServiceFrame ;
             else if (OtherServiceTable.getSelectionModel().isSelectionEmpty()){
                 JOptionPane.showMessageDialog(null, "select any Employee to edite or delete", "Missing Selection", JOptionPane.INFORMATION_MESSAGE);
             }else{
+                String serviceName = (String) OtherServiceTable.getValueAt(row, 0);
                 if (ae.getSource() == Delete){
-                    OtherServiceControl.deleteService((String) OtherServiceTable.getValueAt(row, 0));
+                    OtherServiceControl.deleteService(serviceName);
                     JOptionPane.showMessageDialog(null, "deleted successfully");
                 }
                 else if (ae.getSource() == update){
-                    OtherServiceControl.updateService((String) OtherServiceTable.getValueAt(row, 0),
+                    OtherServiceControl.updateService(serviceName,
                             name.getText(), Double.parseDouble(price.getText()), describe.getText());
                     
                     JOptionPane.showMessageDialog(null, "updated successfully");
+                }else if (ae.getSource() == GenerateReport){
+                    String []date =OtherServiceControl.getServiceDates(serviceName);
+                    JOptionPane.showMessageDialog(null, date[0]);
+                    int count [] =OtherServiceControl.countService(date, serviceName);
+                    JOptionPane.showMessageDialog(null, count[0]);
+                    ReportFrame Report = new ReportFrame();
+                    Report.DataService(count, date);
+                    Report.work();
                 }
             }
         }

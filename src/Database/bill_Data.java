@@ -25,10 +25,6 @@ public class bill_Data extends Data {
         return services.getAssignedServices(id);
     }
     
-    public ArrayList showServicesPrices (ArrayList service){
-        return services.getServicesPrice(service);
-    }
-    
     public void pay (int id){
         try {
             statement.executeUpdate("insert into bill (customerID, boolean_paied) values ("+id+",'true')");
