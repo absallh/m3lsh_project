@@ -1,6 +1,7 @@
 package control;
 
 import Database.CustomerData;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class customer extends person {
@@ -10,6 +11,10 @@ public class customer extends person {
     public customer (){
         CoustomerData = new CustomerData();
         bill = new bill();
+    }
+    
+    public ArrayList showServicesPrices (ArrayList service){
+        return bill.showServicesPrices(service);
     }
     
     public CustomerData getCustomerData(){

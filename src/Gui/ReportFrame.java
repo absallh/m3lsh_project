@@ -36,7 +36,6 @@ public class ReportFrame extends Employee{
     @Override
     public void work() {
         
-       report.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        report.setSize(1500, 900);
        report.setLocation(0,0);
        report.setTitle("OtherService");
@@ -49,20 +48,8 @@ public class ReportFrame extends Employee{
           
              ChartPanel panel=new ChartPanel(barChart);
              report.add(panel);
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+             
+             
        report.setVisible(true);
      
     }

@@ -107,7 +107,7 @@ public class Gust_management extends JPanel {
    //______________________________________________________________________
                                  Bill = new JButton("Bill");
                                  Bill.setBounds(10, 400, 1000, 50);
-                                // Bill.addActionListener(new help());
+                                 Bill.addActionListener(actionButton);
                                  this.add(Bill);
                                  JPanel billpanel = new JPanel();
                                  billpanel.setBounds(10, 420, 1000, 200);
@@ -186,7 +186,16 @@ public class Gust_management extends JPanel {
                         }
 
                     else if (e.getSource() == Bill){
-                      JOptionPane.showConfirmDialog(null, "Generate bill");
+                        Bill billframe = new Bill();
+                        int id = (int) GustTable.getValueAt(row, 0);
+                        String roomNumber = (String)GustTable.getValueAt(row, 5);
+                        Date checkin = (Date) GustTable.getValueAt(row, 3);
+                        Date checkout = (Date) GustTable.getValueAt(row, 4);
+                        String[] serviceName = roomMange.getAssignedServices(id);
+                        
+                        billframe.showBill(id, (String)GustTable.getValueAt(row, 1),
+                                roomNumber, roomMange.stayTime(checkin, checkout),
+                                roomMange.roomPrice(roomNumber),serviceName ,roomMange.servicesPrice(serviceName));
 
                   }else if(e.getSource()== SelectService){
                         Assign_OtherService.setListData( Otherservice.getSelectedValues());

@@ -9,6 +9,8 @@ import static Database.Gust_mangement_data.DEFAULT_QUERY;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -80,6 +82,23 @@ public class Service_Data extends Data{
         }
     }
  
+ public ArrayList getServicesPrice (String[] service){
+     ArrayList<Double> prices = new ArrayList<>();
+     
+        try {
+            for (int i = 0; i < service.length; i++){
+                resultSet = statement.executeQuery("select service_price from Servicee where service_names = '"+
+                        service[i]+"'");
+                if (resultSet.next())
+                    prices.add((double) resultSet.getInt("service_price"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            return prices;
+        }
+    }
+ 
  public ArrayList getAssignedServices(int id){
         ArrayList<String> services = new ArrayList<>();
          
@@ -109,5 +128,9 @@ public class Service_Data extends Data{
         }finally{
             setQuery(DEFAULT_QUERY);
         }
+    }
+
+    ArrayList getServicesPrice(ArrayList service) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

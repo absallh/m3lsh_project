@@ -57,6 +57,10 @@ public class room {
     public void filter (String s){
         RoomData.filter(s);
     }
+    
+    public int roomPrice (String roomNumber){
+        return RoomData.roomPrice(roomNumber);
+    }
 
     void close() {
         RoomData.disconnectFromDatabase();

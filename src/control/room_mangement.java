@@ -17,6 +17,10 @@ public class room_mangement extends employee {
         service = new service();
     }
     
+    public ArrayList showServicesPrices (ArrayList service){
+        return customer.showServicesPrices(service);
+    }
+    
     public Room_data getRoomData (){
         return Room.getRoomData();
     }
@@ -45,6 +49,12 @@ public class room_mangement extends employee {
         return services_array;
     }
     
+    public Double[] servicesPrice (String [] serviceName){
+         ArrayList services_list = service.servicesPrice(serviceName);
+         Double []servicePrices = (Double[]) services_list.toArray(new Double [services_list.size()]);
+         return servicePrices;
+    }
+    
     public void showNearCheckout (){
         Room.showNearCheckout();
     }
@@ -63,6 +73,14 @@ public class room_mangement extends employee {
     
     public void filter (String s){
         Room.filter(s);
+    }
+    
+    public int stayTime(Date checkin, Date checkout){
+        return (int) Math.abs((checkout.getTime() - checkin.getTime()) / (1000*60*60*24));
+    }
+    
+    public int roomPrice (String roomNumber){
+        return Room.roomPrice(roomNumber);
     }
     
     public void close (){

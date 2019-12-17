@@ -5,13 +5,10 @@
  */
 package Gui;
 
-import Database.CustomerData;
-import Database.Room_data;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -22,11 +19,10 @@ public class Bill extends JFrame{
     public Bill() {
         this.setLocation(200, 10);
         this.setSize(300, 1000);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
     }
-    void showBill (int customer_id, String customer_name, int bill_id, String roomNumber ,int time,
-            double roomPrice, String [] serviceName, double [] servicePrice)
+    void showBill (int customer_id, String customer_name, String roomNumber ,int time,
+            int roomPrice, String [] serviceName, Double [] servicePrice)
  {
         this.setLayout(null);
         JLabel  Name = new JLabel("Senior "+" "+customer_name+"  "+"id Number "+"  "+customer_id);
@@ -43,27 +39,18 @@ public class Bill extends JFrame{
         int sum =0;
         JLabel services ;
         for (int i=0;i<serviceName.length;i++){
-            services=new JLabel(serviceName[i]+"      "+"price ="+servicePrice [i]);
+            services=new JLabel(serviceName[i]+"\t"+"price ="+servicePrice [i]);
             services.setBounds(10, 100+i*20, 200, 50);
             this.add(services);
             sum+=servicePrice[i];
         }
         JOptionPane.showMessageDialog(null, sum);
         int total_price = (int) (sum + time*roomPrice);
-        JLabel Total = new JLabel("Total price"+"=          "+total_price);
+        JLabel Total = new JLabel("Total price"+" = "+total_price);
         Total.setBounds(20, 500, 200, 200);
         Total.setForeground(Color.red);
         this.add(Total);
         
-        
-        
-        
+        this.setVisible(true);
         }
-        
-    
-
-
-    
-    
-    
 }

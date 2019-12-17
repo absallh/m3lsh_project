@@ -1,13 +1,16 @@
 package control;
 
+import Database.bill_Data;
+import java.util.ArrayList;
+
 public class bill {
-    private String service_name;
-    private double price;
-    private double total_price;
-    //private Data bill_Data;
+    private bill_Data data;
     
-    public void display_bill ()
-    {
-        
+    public bill(){
+        data = new bill_Data();
+    }
+    
+    public ArrayList showServicesPrices (ArrayList service){
+        return data.showServicesPrices(service);
     }
 }

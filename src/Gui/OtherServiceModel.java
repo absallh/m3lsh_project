@@ -111,11 +111,9 @@ JFrame OtherServiceFrame ;
            public void actionPerformed(ActionEvent e) {
               int count [] ={2,3,5,9,6};
               String []date ={"14/2","3/7","7/9","3/6","1/5"};
-               if (e.getSource()== GenerateReport){
                    ReportFrame Report = new ReportFrame();
                    Report.DataService(count, date);
                    Report.work();
-               }
            }
        });
                            GenerateReport.setBounds(1200, 10, 150, 100);

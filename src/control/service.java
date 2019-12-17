@@ -40,6 +40,10 @@ public class service {
     public void assignServices (int id, String []services){
         service_Data.assignServices(id, services);
     }
+    
+    public ArrayList servicesPrice (String [] serviceName){
+        return  service_Data.getServicesPrice(serviceName);
+    }
 
     void close() {
         service_Data.disconnectFromDatabase();
