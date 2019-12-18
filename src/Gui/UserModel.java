@@ -131,31 +131,31 @@ public class UserModel extends Employee{
             Object ss = e.getSource();
             if (ss==cust)
             {
-                CustomerPanel.show(true);
-                EmployeePanel.show(false);
-                ServicesPanel.show(false);
-                RoomPanel.show(false);
+                CustomerPanel.setVisible(true);
+                EmployeePanel.setVisible(false);
+                ServicesPanel.setVisible(false);
+                RoomPanel.setVisible(false);
             }
             else if (ss== emp)
             {
-                CustomerPanel.show(false);
-                EmployeePanel.show(true);
-                ServicesPanel.show(false);
-                RoomPanel.show(false);
+                CustomerPanel.setVisible(false);
+                EmployeePanel.setVisible(true);
+                ServicesPanel.setVisible(false);
+                RoomPanel.setVisible(false);
             }
             else if (ss== serv)
             {
-                CustomerPanel.show(false);
-                EmployeePanel.show(false);
-                ServicesPanel.show(true);
-                RoomPanel.show(false);        
+                CustomerPanel.setVisible(false);
+                EmployeePanel.setVisible(false);
+                ServicesPanel.setVisible(true);
+                RoomPanel.setVisible(false);        
             }
             else if (ss== Room)
             {
-                 CustomerPanel.show(false);
-                 EmployeePanel.show(false);
-                 ServicesPanel.show(false);
-                 RoomPanel.show(true);    
+                 CustomerPanel.setVisible(false);
+                 EmployeePanel.setVisible(false);
+                 ServicesPanel.setVisible(false);
+                 RoomPanel.setVisible(true);    
             }
       }
    }      

@@ -93,6 +93,8 @@ class EmployeePanel extends JPanel{
    //__________________________________________________________________________
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("follower.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
+                ImageIcon  UpdateIcon= new ImageIcon(getClass().getResource("Update.png"));
+
   //____________________________________________________________________________
                                         Username = new JLabel("Set Username ") ;
                                         Username.setBounds(270, 50, 150, 20);
@@ -102,27 +104,27 @@ class EmployeePanel extends JPanel{
                                  this.add(SetUsername);
      //__________________________________________________________
                           EmployeeNationality = new JLabel("Employee Nationality") ;
-                          EmployeeNationality.setBounds(550, 50, 150, 20);
+                          EmployeeNationality.setBounds(550, 10, 150, 20);
                           nationality = new JComboBox(Nation);
                           
-                          nationality.setBounds(670, 50, 150, 20);
+                          nationality.setBounds(670, 10, 150, 20);
                                  this.add(EmployeeNationality);
                                  this.add(nationality);
      //__________________________________this is the permission  label and combobox that take data from permissions array_________________________________________-
                                 permission = new JLabel("permission");
-                                permission.setBounds(10, 100, 150, 20);
+                                permission.setBounds (10, 50, 150, 20);
                                 this.add(permission);
                                 permissionSelection= new JComboBox(Permissions);
                                 
-                                permissionSelection.setBounds(100, 100, 150, 20);
+                                permissionSelection.setBounds(100, 50, 150, 20);
                                 this.add(permissionSelection);
      //_____________________________ now set password label and field____________________________
                                 password = new JLabel("Set Password");
-                                password.setBounds(10, 140, 150, 20);
+                                password.setBounds(550, 50, 150, 20);
                                 this.add(password);
                                 
                                 SetPassword = new JPasswordField();
-                                SetPassword.setBounds(100, 140, 150, 20);
+                                SetPassword.setBounds(670, 50, 150, 20);
                                 this.add(SetPassword);
                                 
                                 
@@ -133,7 +135,7 @@ class EmployeePanel extends JPanel{
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
                                  
-                           update = new JButton("Update");
+                           update = new JButton(UpdateIcon);
                            update.setBounds(230, 330, 100, 70);
                            this.add(update);
                                  
@@ -145,7 +147,7 @@ class EmployeePanel extends JPanel{
                  EmployeeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                  
                  
-                                 this.setVisible(true);
+                                 this.setVisible(false);
     }                      
     int row;//the selected row index
     private class tableMouseListener extends MouseAdapter{

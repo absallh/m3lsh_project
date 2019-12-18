@@ -2,8 +2,6 @@ package Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Room_data extends Data{
     private static final String DEFULT_QUERY = "select room_number, price, room_type, boolean_busy from Room";
@@ -55,6 +53,7 @@ public class Room_data extends Data{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }finally{
+            setQuery(DEFULT_QUERY);
             return rooms;
         }
     }
@@ -71,6 +70,7 @@ public class Room_data extends Data{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }finally{
+            setQuery(DEFULT_QUERY);
             return price;
         }
     }

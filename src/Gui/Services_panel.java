@@ -86,6 +86,7 @@ class Services_panel extends JPanel {
    //__________________________________________________________________________
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("plus.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
+                ImageIcon  UpdateIcon= new ImageIcon(getClass().getResource("Update.png"));
   //____________________________________________________________________________
 
                          Add = new JButton (ADDIcon); // add add button && Delete
@@ -94,7 +95,7 @@ class Services_panel extends JPanel {
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-                         update = new JButton();
+                         update = new JButton(UpdateIcon);
                          update.setBounds(230, 330, 100, 70);
                          this.add(update);    
                          buttonAction action = new buttonAction();
@@ -102,7 +103,7 @@ class Services_panel extends JPanel {
                          update.addActionListener(action);
                          Delete.addActionListener(action);
                          
-                           this.setVisible(true);
+                           this.setVisible(false);
                                  
                                  
     }

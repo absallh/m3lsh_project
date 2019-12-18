@@ -86,16 +86,16 @@ class CustomerPanel extends JPanel {
         this.add(name);
      //_____________________________________________________
               age = new JLabel("Cutomer age") ;
-              age.setBounds(270, 10, 150, 20);
+              age.setBounds(550, 10, 150, 20);
               age_txt = new JTextField(10) ;
-              age_txt.setBounds(370, 10, 150, 20);
+              age_txt.setBounds(670, 10, 150, 20);
                this.add(age);
                this.add(age_txt);
     //___________________________________________________________________
                     lastName = new JLabel(" last name") ;
-                    lastName.setBounds(550, 10, 150, 20);
+                    lastName.setBounds(270, 10, 150, 20);
                     lastName_txt = new JTextField(20) ;
-                    lastName_txt.setBounds(670, 10, 150, 20);
+                    lastName_txt.setBounds(370, 10, 150, 20);
                          this.add(lastName);
                          this.add(lastName_txt);
    //__________________________________________________________________________
@@ -103,6 +103,8 @@ class CustomerPanel extends JPanel {
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource( "follower.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
                 ImageIcon  SelectIcon= new ImageIcon(getClass().getResource("tap.png"));
+                ImageIcon  UpdateIcon= new ImageIcon(getClass().getResource("Update.png"));
+
 
   //____________________________________________________________________________
                                 commingDate = new JLabel("Check In Date") ;
@@ -126,13 +128,6 @@ class CustomerPanel extends JPanel {
                           nationality.setBounds(670, 50, 150, 20);
                                  this.add(CustomerNationality);
                                  this.add(nationality);
-      //______________________________Combo box to select room ________________________
-                                 RoomChoice = new JLabel("RoomChoice");
-                                 RoomChoice.setBounds(10, 100, 150, 20);
-                                 this.add(RoomChoice);
-                               selectroom = new JComboBox(user_control.getRoomNumbers());
-                               selectroom.setBounds(100, 100, 150, 20);
-                               this.add(selectroom);
       //____________________________________________________________________________________________                       
                          Add = new JButton (ADDIcon); // add add button && Delete
                          Add.setBounds(10, 330, 100, 70);
@@ -140,7 +135,7 @@ class CustomerPanel extends JPanel {
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-                        update = new JButton ("SUBMIT UPDATE"); 
+                        update = new JButton (UpdateIcon); 
                          update.setBounds(230, 330, 100, 70);
                          this.add(update);
                          buttonAction buttonHandling = new buttonAction();

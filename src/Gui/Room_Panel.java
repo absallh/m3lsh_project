@@ -90,6 +90,8 @@ public class Room_Panel extends JPanel {
                           // icons ADD &Delete
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("follower.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("delete.png"));
+                ImageIcon  UpdateIcon= new ImageIcon(getClass().getResource("Update.png"));
+
 
                  Add = new JButton (ADDIcon); // add add button && Delete
                          Add.setBounds(10, 330, 100, 70);
@@ -97,7 +99,7 @@ public class Room_Panel extends JPanel {
                          Delete = new JButton (DeleteIcon);
                          Delete.setBounds(120, 330, 100, 70);
                          this.add(Delete);
-                update = new JButton();
+                update = new JButton(UpdateIcon);
                 update.setBounds(230, 330, 100, 70);
                 this.add(update);
                 
@@ -107,7 +109,7 @@ public class Room_Panel extends JPanel {
                 Delete.addActionListener(action);
                 update.addActionListener(action);
                 
-                this.setVisible(true);
+                this.setVisible(false);
     }
     
     int row;

@@ -104,6 +104,7 @@ JFrame OtherServiceFrame ;
                 ImageIcon  ADDIcon= new ImageIcon(getClass().getResource("Add-icon.png"));
                 ImageIcon  DeleteIcon= new ImageIcon(getClass().getResource("Actions-window-close-icon.png"));
                   ImageIcon  ReportIcon= new ImageIcon(getClass().getResource("33.png"));
+                   ImageIcon  UpdateIcon= new ImageIcon(getClass().getResource("update.png"));
   //____________________________________________________________________________
                              
                            GenerateReport = new JButton(ReportIcon);
@@ -111,13 +112,13 @@ JFrame OtherServiceFrame ;
                            OtherServiceFrame.add(GenerateReport);
 
                          Add = new JButton (ADDIcon); // add add button && Delete
-                         Add.setBounds(10, 410, 250, 50);
+                         Add.setBounds(10, 410, 150, 50);
                          OtherServiceFrame.add(Add);
                          Delete = new JButton (DeleteIcon);
-                         Delete.setBounds(260, 410, 250, 50);
+                         Delete.setBounds(160, 410, 200, 50);
                          OtherServiceFrame.add(Delete);
-                         update = new JButton("Update");
-                         update.setBounds(370, 410, 250, 50);
+                         update = new JButton(UpdateIcon);
+                         update.setBounds(360, 410, 150, 50);
                          OtherServiceFrame.add(update);
                          
                          buttonAction action = new buttonAction();
@@ -198,9 +199,7 @@ JFrame OtherServiceFrame ;
                     JOptionPane.showMessageDialog(null, "updated successfully");
                 }else if (ae.getSource() == GenerateReport){
                     String []date =OtherServiceControl.getServiceDates(serviceName);
-                    JOptionPane.showMessageDialog(null, date[0]);
                     int count [] =OtherServiceControl.countService(date, serviceName);
-                    JOptionPane.showMessageDialog(null, count[0]);
                     ReportFrame Report = new ReportFrame();
                     Report.DataService(count, date);
                     Report.work();

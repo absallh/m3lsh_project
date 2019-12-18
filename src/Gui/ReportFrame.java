@@ -39,14 +39,15 @@ public class ReportFrame extends Employee{
        report.setSize(1500, 900);
        report.setLocation(0,0);
        report.setTitle("OtherService");
-       report.setLayout(new FlowLayout());
+       report.setLayout(null);
        chartPanel = new JPanel();
       
-          JFreeChart barChart = ChartFactory.createBarChart("Services statistical report", "Services Name", "Services price $",dataset ,PlotOrientation.VERTICAL, true, true, false);
+          JFreeChart barChart = ChartFactory.createBarChart("Services statistical report", "Services Name", "Services use times ",dataset ,PlotOrientation.VERTICAL, true, true, false);
           CategoryPlot barchrt =barChart.getCategoryPlot();
           barchrt.setRangeGridlinePaint(Color.BLUE);
           
              ChartPanel panel=new ChartPanel(barChart);
+             panel.setBounds(10, 10, 1290, 700);
              report.add(panel);
              
              
@@ -57,7 +58,7 @@ public class ReportFrame extends Employee{
     public void DataService(  int [] count , String [] date ){
         
         for (int i=0;i<count.length;i++){
-    dataset.addValue( count [i], "price1", date [i]);
+    dataset.addValue( count [i], "Service", date [i]);
         }
     }
     

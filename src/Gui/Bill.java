@@ -18,7 +18,7 @@ public class Bill extends JFrame{
     
     public Bill() {
         this.setLocation(200, 10);
-        this.setSize(300, 1000);
+        this.setSize(400, 1000);
         this.setVisible(false);
     }
     void showBill (int customer_id, String customer_name, String roomNumber ,int time,

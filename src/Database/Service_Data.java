@@ -13,9 +13,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -117,6 +114,8 @@ public class Service_Data extends Data{
             if (resultSet.next()){
                 firstDate = resultSet.getDate(1);
                 cal.setTime(firstDate);
+                cal.add(Calendar.DAY_OF_MONTH, 2);
+                firstDate = cal.getTime();
             }
             do{
                 dates.add(simpleDateFormat.format(firstDate));
@@ -141,7 +140,7 @@ public class Service_Data extends Data{
                     "on service_names = '"+serviceName+"' and coming_date <= '"+
                      dates.get(i)+"' and check_out_date >= '"+dates.get(i)+"'");
              if (resultSet.next()){
-                 count.add((resultSet.getInt(1))/4);
+                 count.add((resultSet.getInt(1))/2);
              }
          }
      }catch (SQLException ex) {
